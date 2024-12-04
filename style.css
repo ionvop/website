@@ -75,6 +75,17 @@ body {
     justify-content: center;
 }
 
+.-link {
+    cursor: pointer;
+    color: var(--theme--light);
+    text-decoration: underline;
+    transition-duration: 0.1s;
+}
+
+.-link:hover {
+    color: var(--theme--contrast);
+}
+
 .-title {
     font-size: 2rem;
 }
@@ -86,6 +97,10 @@ body {
 
 .-unskew {
     transform: skewX(10deg);
+}
+
+.-main {
+    opacity: 0%;
 }
 
 .-header {
@@ -104,6 +119,7 @@ body {
     padding: 1rem 3rem;
     font-size: 3rem;
     font-weight: bolder;
+    cursor: pointer;
 }
 
 .-header__content__sites {
@@ -155,6 +171,27 @@ body {
 
 .-footer__tab:hover {
     color: #fff;
+}
+
+.-intro {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.-intro__fade {
+    animation-name: -intro__fade;
+}
+
+.-intro__float__up {
+    animation-name: -intro__float__up;
+}
+
+.-intro__float__down {
+    animation-name: -intro__float__down;
+}
+
+.-intro__float__left {
+    animation-name: -intro__float__left;
 }
 
 @keyframes -intro__fade {
