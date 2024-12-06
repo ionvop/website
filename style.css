@@ -40,6 +40,11 @@ body {
     background-color: var(--theme--light);
 }
 
+.-button:disabled {
+    cursor: not-allowed;
+    background-color: #aaa;
+}
+
 .-form {
     margin: 0rem;
     margin-block-end: 0rem;
@@ -149,6 +154,7 @@ body {
 
 .-content {
     min-height: 90vh;
+    overflow-x: hidden;
 }
 
 .-footer {
@@ -156,6 +162,7 @@ body {
     grid-template-columns: max-content 1fr repeat(4, max-content) 5rem;
     background-color: var(--theme--dark);
     user-select: none;
+    overflow: hidden;
 }
 
 .-footer__title {

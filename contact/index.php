@@ -52,6 +52,7 @@ Debug();
 
             .contact {
                 padding: 10rem;
+                padding-top: 0rem;
             }
 
             .contact__title {
@@ -113,10 +114,12 @@ Debug();
             }
 
             .contact__assistant__chat__container__box__loader {
-                display: none;
+                display: grid;
                 grid-template-columns: max-content 1fr;
                 transition-duration: 1s;
                 opacity: 0%;
+                height: 0rem;
+                overflow: hidden;
             }
 
             .contact__assistant__chat__container__box__loader__icon {
@@ -194,7 +197,7 @@ Debug();
                                     </div>
                                     <div class="contact__assistant__chat__container__box__loader">
                                         <div class="contact__assistant__chat__container__box__loader__icon">
-                                            <?=Loader("pulse-rings-multiple")?>
+                                            <?=Loader("rings")?>
                                         </div>
                                         <div></div>
                                     </div>
@@ -204,10 +207,10 @@ Debug();
                             <div class="contact__assistant__chat__reply">
                                 <div class="contact__assistant__chat__reply__box">
                                     <div class="contact__assistant__chat__reply__box__input">
-                                        <input class="-input" placeholder="Write a reply" onkeydown="if (event.key == 'Enter') {btnSend(this)}">
+                                        <input class="-input" placeholder="Write a reply" onkeydown="inputEnter(this)" disabled>
                                     </div>
                                     <div class="contact__assistant__chat__reply__box__button">
-                                        <button class="-button" onclick="btnSend(this)">
+                                        <button class="-button" onclick="btnSend(this)" disabled>
                                             <?=Icon("send")?>
                                         </button>
                                     </div>
@@ -235,9 +238,15 @@ Debug();
 
         function btnSend(element) {
             let input = document.querySelector(".contact__assistant__chat__reply__box__input > input");
+            let send = document.querySelector(".contact__assistant__chat__reply__box__button > button");
             let box = document.querySelector(".contact__assistant__chat__container__box");
             let render = document.querySelector(".contact__assistant__chat__container__box__render");
             let loader = document.querySelector(".contact__assistant__chat__container__box__loader");
+
+            if (input.value == "") {
+                return;
+            }
+
             let item = document.createElement("div");
             item.classList.add("item");
             item.classList.add("item--user");
@@ -251,7 +260,8 @@ Debug();
             item.appendChild(itemText);
             render.appendChild(item);
             input.value = "";
-            loader.style.display = "grid";
+            send.disabled = true;
+            loader.style.height = "auto";
             loader.style.opacity = "100%";
             box.scrollTo({top: box.scrollHeight, behavior: "smooth"});
             let history = [];
@@ -295,7 +305,7 @@ Debug();
                 loader.style.opacity = "0%";
 
                 setTimeout(() => {
-                    loader.style.display = "none";
+                    loader.style.height = "0rem";
                     let item = document.createElement("div");
                     item.classList.add("item");
                     item.classList.add("item--ai");
@@ -311,6 +321,11 @@ Debug();
                     box.scrollTo({top: box.scrollHeight, behavior: "smooth"});
                 }, 1000);
             })
+        }
+
+        function inputEnter(element) {
+            let send = document.querySelector(".contact__assistant__chat__reply__box__button > button");
+            send.click();
         }
     </script>
 </html>
