@@ -178,11 +178,11 @@ Debug();
     <script>
         AnimatePage([
             {target: ".profile", type: "-intro__fade"},
-            {target: ".profile__column__avatar > img", type: "-intro__float__up"},
-            {target: ".profile__column__username", type: "-intro__float__up"},
-            {target: ".profile__column__titles", type: "-intro__float__up"},
-            {target: ".profile__column__label", type: "-intro__float__up"},
-            {target: ".profile__column__chu2", type: "-intro__float__up"},
+            {target: ".profile__column__avatar > img", type: "-intro__float__left"},
+            {target: ".profile__column__username", type: "-intro__float__left"},
+            {target: ".profile__column__titles", type: "-intro__float__left"},
+            {target: ".profile__column__label", type: "-intro__float__left"},
+            {target: ".profile__column__chu2", type: "-intro__float__left"},
             {target: ".profile__panel__banner", type: "-intro__float__left"},
             {target: ".profile__panel__about__title", type: "-intro__float__left"},
             {target: ".profile__panel__about__subtitle", type: "-intro__float__left"},

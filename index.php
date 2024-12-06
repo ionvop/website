@@ -151,18 +151,18 @@ Debug();
     <script src="script.js"></script>
     <script>
         AnimatePage([
-            { target: ".title", type: "-intro__float__up" },
-            { target: ".subtitle", type: "-intro__float__up" },
-            { target: ".contact", type: "-intro__float__up" },
+            { target: ".title", type: "-intro__float__left" },
+            { target: ".subtitle", type: "-intro__float__left" },
+            { target: ".contact", type: "-intro__float__left" },
             { target: ".about__programming__info__icon", type: "-intro__float__up" },
-            { target: ".about__programming__info__subject", type: "-intro__float__left" },
-            { target: ".about__programming__details", type: "-intro__float__up" },
+            { target: ".about__programming__info__subject", type: "-intro__float__up" },
+            { target: ".about__programming__details", type: "-intro__float__left" },
             { target: ".about__hobby__info__icon", type: "-intro__float__up" },
-            { target: ".about__hobby__info__subject", type: "-intro__float__left" },
-            { target: ".about__hobby__details", type: "-intro__float__up" },
+            { target: ".about__hobby__info__subject", type: "-intro__float__up" },
+            { target: ".about__hobby__details", type: "-intro__float__left" },
             { target: ".about__waifu__info__icon", type: "-intro__float__up" },
-            { target: ".about__waifu__info__subject", type: "-intro__float__left" },
-            { target: ".about__waifu__details", type: "-intro__float__up" }
+            { target: ".about__waifu__info__subject", type: "-intro__float__up" },
+            { target: ".about__waifu__details", type: "-intro__float__left" }
         ]);
     </script>
 </html>

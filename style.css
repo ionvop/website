@@ -26,7 +26,7 @@ body {
 
 .-button {
     padding: 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background-color: var(--theme);
     font-family: 'Exo 2', sans-serif;
     color: #fff;
@@ -194,6 +194,10 @@ body {
     animation-name: -intro__float__left;
 }
 
+.-intro__float__right {
+    animation-name: -intro__float__right;
+}
+
 @keyframes -intro__fade {
     from {
         opacity: 0%;
@@ -231,6 +235,18 @@ body {
 @keyframes -intro__float__left {
     from {
         transform: translateX(1rem);
+        opacity: 0%;
+    }
+
+    to {
+        transform: translateX(0rem);
+        opacity: 100%;
+    }
+}
+
+@keyframes -intro__float__right {
+    from {
+        transform: translateX(-1rem);
         opacity: 0%;
     }
 
