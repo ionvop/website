@@ -43,6 +43,11 @@ Debug();
                 height: 5rem;
                 border-radius: 50%;
                 box-shadow: 0rem 0rem 1rem #000;
+                transition-duration: 0.1s;
+            }
+
+            .socials__platform > img:hover {
+                transform: scale(1.3);
             }
 
             .contact {
