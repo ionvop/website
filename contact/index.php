@@ -14,7 +14,23 @@ Debug();
         <base href="../">
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <style>
+            p {
+                margin: 0rem;
+            }
+
+            a {
+                cursor: pointer;
+                color: var(--theme--light);
+                text-decoration: underline;
+                transition-duration: 0.1s;
+            }
+
+            a:hover {
+                color: var(--theme--contrast);
+            }
+
             .main__contact {
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg3.png");
                 background-size: 100%;
@@ -42,12 +58,24 @@ Debug();
                 width: 5rem;
                 height: 5rem;
                 border-radius: 50%;
-                box-shadow: 0rem 0rem 1rem #000;
                 transition-duration: 0.1s;
             }
 
             .socials__platform > img:hover {
                 transform: scale(1.3);
+                box-shadow: 0rem 0rem 1rem #fff;
+            }
+
+            .socials__platforms__discord > img {
+                box-shadow: 0rem 0rem 1rem #5865f2;
+            }
+
+            .socials__platforms__github > img {
+                box-shadow: 0rem 0rem 1rem #000;
+            }
+
+            .socials__platforms__youtube > img {
+                box-shadow: 0rem 0rem 1rem #f00;
             }
 
             .contact {
@@ -124,6 +152,7 @@ Debug();
 
             .contact__assistant__chat__container__box__loader__icon {
                 padding: 5rem;
+                padding-top: 1rem;
                 padding-bottom: 1rem;
                 color: var(--theme--contrast);
             }
@@ -165,13 +194,13 @@ Debug();
                     <div class="socials__platforms">
                         <div></div>
                         <div class="socials__platforms__discord socials__platform">
-                            <img src="https://s.magecdn.com/social/tc-discord.svg">
+                            <img src="https://s.magecdn.com/social/tc-discord.svg" class="-script__new" data-href="https://discord.com/users/301203021608779776">
                         </div>
                         <div class="socials__platforms__github socials__platform">
-                            <img src="https://s.magecdn.com/social/tc-github.svg">
+                            <img src="https://s.magecdn.com/social/tc-github.svg" class="-script__new" data-href="https://github.com/ionvop">
                         </div>
                         <div class="socials__platforms__youtube socials__platform">
-                            <img src="https://s.magecdn.com/social/tc-youtube.svg">
+                            <img src="https://s.magecdn.com/social/tc-youtube.svg" class="-script__new" data-href="https://www.youtube.com/channel/UCXDfWc9wKYat9KmgRRMqaDg">
                         </div>
                         <div></div>
                     </div>
@@ -207,7 +236,7 @@ Debug();
                             <div class="contact__assistant__chat__reply">
                                 <div class="contact__assistant__chat__reply__box">
                                     <div class="contact__assistant__chat__reply__box__input">
-                                        <input class="-input" placeholder="Write a reply" onkeydown="inputEnter(this)" disabled>
+                                        <input class="-input" placeholder="Write a reply" oninput="inputReply(this)" onkeydown="if (event.key == 'Enter') inputReplyEnter(this)">
                                     </div>
                                     <div class="contact__assistant__chat__reply__box__button">
                                         <button class="-button" onclick="btnSend(this)" disabled>
@@ -259,7 +288,9 @@ Debug();
             itemText.innerHTML = input.value;
             item.appendChild(itemText);
             render.appendChild(item);
+
             input.value = "";
+            input.disabled = true;
             send.disabled = true;
             loader.style.height = "auto";
             loader.style.opacity = "100%";
@@ -306,6 +337,7 @@ Debug();
 
                 setTimeout(() => {
                     loader.style.height = "0rem";
+
                     let item = document.createElement("div");
                     item.classList.add("item");
                     item.classList.add("item--ai");
@@ -315,15 +347,27 @@ Debug();
                     itemText.classList.add("item__text");
                     itemText.classList.add("-intro");
                     itemText.classList.add("-intro__float__left");
-                    itemText.innerHTML = data.message;
+                    itemText.innerHTML = marked.parse(data.message);
                     item.appendChild(itemText);
                     render.appendChild(item);
+
+                    document.querySelectorAll('a').forEach((anchor) => {
+                        anchor.setAttribute('target', '_blank');
+                    });
+
+                    input.disabled = false;
+                    send.disabled = false;
                     box.scrollTo({top: box.scrollHeight, behavior: "smooth"});
                 }, 1000);
             })
         }
 
-        function inputEnter(element) {
+        function inputReply(element) {
+            let send = document.querySelector(".contact__assistant__chat__reply__box__button > button");
+            send.disabled = element.value == "";
+        }
+
+        function inputReplyEnter(element) {
             let send = document.querySelector(".contact__assistant__chat__reply__box__button > button");
             send.click();
         }

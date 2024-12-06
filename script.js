@@ -1,11 +1,11 @@
 window.onscroll = () => {
-    let parallax = document.querySelector(".-script__parallax");
-    // let scrollRatio = document.body.scrollTop / (document.body.scrollHeight - window.innerHeight);
-    // let heightLimit = parallax.getAttribute("data-height");
-    // if (heightLimit == null) heightLimit = 1;
-    // let result = scrollRatio * heightLimit;
-    // parallax.style.backgroundPositionY = result * 100 + "%";
+    UpdateParallax();
+}
 
+UpdateParallax();
+
+function UpdateParallax() {
+    let parallax = document.querySelector(".-script__parallax");
     parallax.style.backgroundPositionY = document.body.scrollTop * 0.7 + "px";
 }
 
