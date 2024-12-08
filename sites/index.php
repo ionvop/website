@@ -65,21 +65,37 @@ Debug();
                 padding: 1rem;
             }
 
-            .section__title {
+            .section__header {
+                cursor: pointer;
+                transition-duration: 0.1s;
+                backdrop-filter: brightness(50%);
+            }
+
+            .section__header:hover {
+                backdrop-filter: brightness(100%);
+            }
+
+            .section__header__title {
                 padding: 10rem;
                 padding-bottom: 5rem;
                 font-weight: bold;
             }
 
-            .section__subtitle {
+            .section__header__subtitle {
                 padding: 10rem;
                 padding-top: 0rem;
             }
 
             .section__details {
                 padding: 5rem;
+                padding-bottom: 10rem;
                 background-color: #111;
                 line-height: 3rem;
+            }
+
+            .ionvop {
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.png");
+                background-size: 100%;
             }
 
             .mailist {
@@ -102,7 +118,7 @@ Debug();
                         Welcome to my sites
                     </div>
                     <div class="header__subtitle -title -center">
-                        These are the sites I made
+                        These are the sites and services I made
                     </div>
                     <div class="header__section">
                         <div class="header__section__apps header__section__card">
@@ -148,28 +164,50 @@ Debug();
                         </div>
                     </div>
                 </div>
+                <div class="ionvop section -script__parallax">
+                    <div class="ionvop__header section__header -script__new" data-href="/home/">
+                        <div class="ionvop__header__title section__header__title -title -center">
+                            ionvop
+                        </div>
+                        <div class="ionvop__header__subtitle section__header__subtitle -center">
+                            Click here to go to this website
+                        </div>
+                    </div>
+                    <div class="ionvop__details section__details">
+                        This is the landing page for this website.<br>
+                        You are currently here right now.
+                    </div>
+                </div>
                 <div class="mailist section -script__parallax">
-                    <div class="mailist__title section__title -title -center">
-                        mailist
+                    <div class="saucedb__header section__header -script__new" data-href="/mailist/">
+                        <div class="mailist__header__title section__header__title -title -center">
+                            mailist
+                        </div>
+                        <div class="mailist__header__subtitle section__header__subtitle -center">
+                            A simple platform for custom maimai charts
+                        </div>
                     </div>
-                    <div class="mailist__subtitle section__subtitle -center">
-                        A simple homemade custom maimai chart repository
-                    </div>
+                    
                     <div class="mailist__details section__details">
                         mailist offers a platform for sharing, discovering, and enjoying custom maimai charts.<br>
                         The goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.
                     </div>
                 </div>
                 <div class="saucedb section -script__parallax">
-                    <div class="saucedb__title section__title -title -center">
-                        saucedb
-                    </div>
-                    <div class="saucedb__subtitle section__subtitle -center">
-                        A simple homemade custom maimai chart repository
+                    <div class="saucedb__header section__header -script__new" data-href="/saucedb/">
+                        <div class="saucedb__header__title section__header__title -title -center">
+                            saucedb
+                        </div>
+                        <div class="saucedb__header__subtitle section__header__subtitle -center">
+                            A simple database for archiving anime and manga sources.
+                        </div>
                     </div>
                     <div class="saucedb__details section__details">
-                        saucedb offers a platform for sharing, discovering, and enjoying custom maimai charts.<br>
-                        The goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.
+                        saucedb is a simple database for archiving sources of anime and manga that were hard to find.<br>
+                        This was one of my first projects and was mostly for personal use.<br>
+                        <br>
+                        It was very useful back when I was running a Facebook page called "Anime SauceHub" dedicated to helping people find the source of images they provided.<br>
+                        Unfortunately, the page was taken down and I no longer do source hunting.
                     </div>
                 </div>
             </div>
@@ -180,9 +218,20 @@ Debug();
     <script>
         AnimatePage([]);
 
-        let sections = document.querySelectorAll(".section");
-        sections.forEach((section) => {
-            section.setAttribute("data-offset", (section.getBoundingClientRect().top + window.scrollY) * -0.7);
+        window.addEventListener("resize", () => {
+            updateOffset();
         });
+
+        updateOffset();
+
+        function updateOffset() {
+            let sections = document.querySelectorAll(".section");
+
+            sections.forEach((section) => {
+                section.setAttribute("data-offset", (section.getBoundingClientRect().top + window.scrollY) * -0.7);
+            });
+
+            UpdateParallax();
+        }
     </script>
 </html>

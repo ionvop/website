@@ -268,6 +268,15 @@ Debug();
             {target: ".contact__assistant__chat__reply", type: "-intro__float__left"}
         ]);
 
+        let message = new URLSearchParams(window.location.search).get("m");
+
+        if (message != null) {
+            let input = document.querySelector(".contact__assistant__chat__reply__box__input > input");
+            input.value = message;
+            input.disabled = false;
+            input.focus();
+        }
+
         function btnSend(element) {
             let input = document.querySelector(".contact__assistant__chat__reply__box__input > input");
             let send = document.querySelector(".contact__assistant__chat__reply__box__button > button");

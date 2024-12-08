@@ -91,13 +91,13 @@ Debug();
                 <div class="subtitle -title -center">
                     Welcome to my website
                 </div>
-                <form action="server.php" class="-form contact">
+                <form action="contact/" class="-form contact">
                     <div></div>
                     <div class="contact__input">
-                        <input class="-input" name="message" placeholder="Send me a message">
+                        <input class="-input" name="m" placeholder="Send me a message">
                     </div>
                     <div class="contact__button">
-                        <button class="-button" name="method" value="sendMessage">
+                        <button class="-button">
                             <?=Icon("send")?>
                         </button>
                     </div>
