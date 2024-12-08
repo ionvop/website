@@ -42,6 +42,7 @@ Debug();
                 height: 10rem;
                 object-fit: cover;
                 border-radius: 10rem;
+                user-select: none;
             }
 
             .profile__column__username {
@@ -65,6 +66,7 @@ Debug();
 
             .profile__column__chu2 > img {
                 width: 10rem;
+                user-select: none;
             }
 
             .profile__panel__banner {
@@ -74,6 +76,7 @@ Debug();
             .profile__panel__banner > img {
                 width: 100%;
                 border-radius: 1rem;
+                user-select: none;
             }
 
             .profile__panel__about__title {
@@ -90,29 +93,6 @@ Debug();
                 padding: 1rem;
                 padding-top: 3rem;
                 line-height: 3rem;
-            }
-
-            .poem {
-                display: grid;
-                grid-template-columns: 1fr max-content;
-                padding: 5rem;
-            }
-
-            .poem__content__title {
-                padding: 1rem;
-                font-weight: bold;
-            }
-
-            .poem__content__text {
-                padding: 1rem;
-            }
-
-            .poem__chu2 {
-                padding: 1rem;
-            }
-
-            .poem__chu2 > img {
-                width: 30rem;
             }
         </style>
     </head>

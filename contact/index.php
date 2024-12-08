@@ -59,6 +59,8 @@ Debug();
                 height: 5rem;
                 border-radius: 50%;
                 transition-duration: 0.1s;
+                cursor: pointer;
+                user-select: none;
             }
 
             .socials__platform > img:hover {
@@ -99,6 +101,7 @@ Debug();
 
             .contact__assistant__avatar > img {
                 width: 20rem;
+                user-select: none;
             }
 
             .contact__assistant__chat__container {
@@ -186,7 +189,7 @@ Debug();
     <body>
         <div class="main__contact -main -script__parallax">
             <?=SetHeader()?>
-            <div class="content">
+            <div class="content -content">
                 <div class="socials">
                     <div class="socials__title -title -center">
                         You can find me on these platforms:
@@ -294,7 +297,7 @@ Debug();
             send.disabled = true;
             loader.style.height = "auto";
             loader.style.opacity = "100%";
-            box.scrollTo({top: box.scrollHeight, behavior: "smooth"});
+            ScrollToPosition(box, 1, 1000, "easeInOut");
             let history = [];
             let messages = document.querySelectorAll(".contact__assistant__chat__container__box__render .item");
 
@@ -357,7 +360,7 @@ Debug();
 
                     input.disabled = false;
                     send.disabled = false;
-                    box.scrollTo({top: box.scrollHeight, behavior: "smooth"});
+                    ScrollToPosition(box, 1, 1000, "easeInOut");
                 }, 1000);
             })
         }

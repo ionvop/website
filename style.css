@@ -138,7 +138,8 @@ body {
 .-header__tab {
     padding: 1rem 3rem;
     font-size: 2rem;
-    border-left: var(--theme--dark) 0.2rem solid;
+    border-left: var(--theme--dark) 0.1rem solid;
+    border-right: var(--theme--dark) 0.1rem solid;
     transition-duration: 0.1s;
     cursor: pointer;
 }
@@ -153,7 +154,6 @@ body {
 }
 
 .-content {
-    min-height: 90vh;
     overflow-x: hidden;
 }
 

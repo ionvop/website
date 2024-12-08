@@ -1,12 +1,15 @@
-window.onscroll = () => {
+window.addEventListener("scroll", () => {
     UpdateParallax();
-}
+});
 
 UpdateParallax();
 
-function UpdateParallax() {
-    let parallax = document.querySelector(".-script__parallax");
-    parallax.style.backgroundPositionY = document.body.scrollTop * 0.7 + "px";
+if (Math.random() < 0.01) {
+    setTimeout(() => {
+        document.body.style.backgroundImage = "url('assets/bkub_chu2.png')";
+        document.body.style.backgroundSize = "20%";
+        document.body.style.backgroundPosition = "fixed";
+    }, 2000);
 }
 
 GlobalEventListener("click", ".-script__link", (element, event) => {
@@ -36,25 +39,6 @@ GlobalEventListener("click", ".-script__link", (element, event) => {
 GlobalEventListener("click", ".-script__new", element => {
     window.open(element.getAttribute("data-href"));
 });
-
-function PreloadPage(url) {
-    fetch(url, {
-        method: "GET",
-        credentials: "include"
-    }).then(response => {
-        if (!response.ok) {
-            console.error(`Failed to preload page: ${response.statusText}`);
-            return;
-        }
-
-        return response.text();
-    }).then(content => {
-        // Optionally, store the content or handle it as needed
-        console.log("Page preloaded:", url);
-    }).catch(error => {
-        console.error("Error preloading page:", error);
-    });
-}
 
 function AnimatePage(contentTimeline) {
     let headerTimeline = [
@@ -127,4 +111,61 @@ function GlobalEventListener(type, selector, callback) {
             callback(event.target.closest(selector), event);
         }
     });
+}
+
+function PreloadPage(url) {
+    fetch(url, {
+        method: "GET",
+        credentials: "include"
+    }).then(response => {
+        if (!response.ok) {
+            console.error(`Failed to preload page: ${response.statusText}`);
+            return;
+        }
+
+        return response.text();
+    }).then(content => {
+        // Optionally, store the content or handle it as needed
+        console.log("Page preloaded:", url);
+    }).catch(error => {
+        console.error("Error preloading page:", error);
+    });
+}
+
+function ScrollToPosition(element, to, duration = 1000, ease = 'easeInOut') {
+    const easingFunctions = {
+        easeIn: t => t * t,
+        easeOut: t => t * (2 - t),
+        easeInOut: t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t)
+    };
+
+    const easeFunction = easingFunctions[ease] || easingFunctions['easeInOut'];
+    const start = element.scrollTop;
+    const totalDistance = element.scrollHeight - element.clientHeight;
+    const targetPosition = totalDistance * to;
+    const distance = targetPosition - start;
+    const startTime = performance.now();
+
+    function animateScroll(currentTime) {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1); // Clamp progress to [0, 1]
+        const easedProgress = easeFunction(progress);
+
+        element.scrollTop = start + distance * easedProgress;
+
+        if (progress < 1) {
+            requestAnimationFrame(animateScroll);
+        }
+    }
+
+    requestAnimationFrame(animateScroll);
+}
+
+function UpdateParallax() {
+    let parallaxes = document.querySelectorAll(".-script__parallax");
+
+    parallaxes.forEach((parallax) => {
+        let offset = (parallax.getAttribute("data-offset") != null) ? parallax.getAttribute("data-offset") : 0;
+        parallax.style.backgroundPositionY = document.body.scrollTop * 0.7 + parseFloat(offset) + "px";
+    })
 }
