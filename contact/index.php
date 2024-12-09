@@ -13,6 +13,7 @@ Debug();
         </title>
         <base href="../">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <style>

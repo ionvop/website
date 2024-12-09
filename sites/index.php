@@ -13,6 +13,7 @@ Debug();
         </title>
         <base href="../">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             .main__sites {
@@ -67,12 +68,12 @@ Debug();
 
             .section__header {
                 cursor: pointer;
-                transition-duration: 0.1s;
-                backdrop-filter: brightness(50%);
+                filter: brightness(100%);
+                transition: filter 0.1s;
             }
 
             .section__header:hover {
-                backdrop-filter: brightness(100%);
+                filter: brightness(150%);
             }
 
             .section__header__title {
@@ -87,24 +88,32 @@ Debug();
             }
 
             .section__details {
-                padding: 5rem;
-                padding-bottom: 10rem;
                 background-color: #111;
+            }
+
+            .section__details__text {
+                padding: 5rem;
                 line-height: 3rem;
             }
 
-            .ionvop {
-                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.png");
+            .section__details__visit {
+                padding: 1rem;
+                padding-top: 0rem;
+                padding-bottom: 10rem;
+            }
+
+            .ionvop__header {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.png");
                 background-size: 100%;
             }
 
-            .mailist {
-                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/mailist.png");
+            .mailist__header {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/mailist.png");
                 background-size: 100%;
             }
 
-            .saucedb {
-                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.png");
+            .saucedb__header {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.png");
                 background-size: 100%;
             }
         </style>
@@ -164,22 +173,29 @@ Debug();
                         </div>
                     </div>
                 </div>
-                <div class="ionvop section -script__parallax">
-                    <div class="ionvop__header section__header -script__new" data-href="/home/">
+                <div class="ionvop section">
+                    <div class="ionvop__header section__header -script__parallax -script__new" data-href="/home/">
                         <div class="ionvop__header__title section__header__title -title -center">
                             ionvop
                         </div>
                         <div class="ionvop__header__subtitle section__header__subtitle -center">
-                            Click here to go to this website
+                            Click here to visit this website
                         </div>
                     </div>
                     <div class="ionvop__details section__details">
-                        This is the landing page for this website.<br>
-                        You are currently here right now.
+                        <div class="ionvop__details__text section__details__text">
+                            This is the landing page for this website.<br>
+                            You are currently here right now.
+                        </div>
+                        <div class="ionvop__details__visit section__details__visit -center">
+                            <button class="-button -script__new" data-href="/home/">
+                                Visit Page
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="mailist section -script__parallax">
-                    <div class="saucedb__header section__header -script__new" data-href="/mailist/">
+                <div class="mailist section">
+                    <div class="mailist__header section__header -script__parallax -script__new" data-href="/mailist/">
                         <div class="mailist__header__title section__header__title -title -center">
                             mailist
                         </div>
@@ -187,14 +203,20 @@ Debug();
                             A simple platform for custom maimai charts
                         </div>
                     </div>
-                    
                     <div class="mailist__details section__details">
-                        mailist offers a platform for sharing, discovering, and enjoying custom maimai charts.<br>
-                        The goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.
+                        <div class="mailist__details__text section__details__text">
+                            mailist offers a platform for sharing, discovering, and enjoying custom maimai charts.<br>
+                            The goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.
+                        </div>
+                        <div class="mailist__details__visit section__details__visit -center">
+                            <button class="-button -script__new" data-href="/mailist/">
+                                Visit Page
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="saucedb section -script__parallax">
-                    <div class="saucedb__header section__header -script__new" data-href="/saucedb/">
+                <div class="saucedb section">
+                    <div class="saucedb__header section__header -script__parallax -script__new" data-href="/saucedb/">
                         <div class="saucedb__header__title section__header__title -title -center">
                             saucedb
                         </div>
@@ -203,11 +225,18 @@ Debug();
                         </div>
                     </div>
                     <div class="saucedb__details section__details">
-                        saucedb is a simple database for archiving sources of anime and manga that were hard to find.<br>
-                        This was one of my first projects and was mostly for personal use.<br>
-                        <br>
-                        It was very useful back when I was running a Facebook page called "Anime SauceHub" dedicated to helping people find the source of images they provided.<br>
-                        Unfortunately, the page was taken down and I no longer do source hunting.
+                        <div class="saucedb__details__text section__details__text">
+                            saucedb is a simple database for archiving sources of anime and manga that were hard to find.<br>
+                            This was one of my first projects and was mostly for personal use.<br>
+                            <br>
+                            It was very useful back when I was running a Facebook page called "Anime SauceHub" dedicated to helping people find the source of images they provided.<br>
+                            Unfortunately, the page was taken down and I no longer do source hunting.
+                        </div>
+                        <div class="saucedb__details__visit section__details__visit -center">
+                            <button class="-button -script__new" data-href="/saucedb/">
+                                Visit Page
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -216,7 +245,28 @@ Debug();
     </body>
     <script src="script.js"></script>
     <script>
-        AnimatePage([]);
+        AnimatePage([
+            {target: ".header__title", type: "-intro__float__left"},
+            {target: ".header__subtitle", type: "-intro__float__left"},
+            {target: ".header__section__apps__info__icon", type: "-intro__float__up"},
+            {target: ".header__section__apps__info__subject", type: "-intro__float__up"},
+            {target: ".header__section__apps__details", type: "-intro__float__left"},
+            {target: ".header__section__socials__info__icon", type: "-intro__float__up"},
+            {target: ".header__section__socials__info__subject", type: "-intro__float__up"},
+            {target: ".header__section__socials__details", type: "-intro__float__left"},
+            {target: ".header__section__portfolio__info__icon", type: "-intro__float__up"},
+            {target: ".header__section__portfolio__info__subject", type: "-intro__float__up"},
+            {target: ".header__section__portfolio__details", type: "-intro__float__left"},
+            {target: ".ionvop__header__title", type: "-intro__float__left"},
+            {target: ".ionvop__header__subtitle", type: "-intro__float__left"},
+            {target: ".ionvop__details__text", type: "-intro__float__left"},
+            {target: ".mailist__header__title", type: "-intro__float__left"},
+            {target: ".mailist__header__subtitle", type: "-intro__float__left"},
+            {target: ".mailist__details__text", type: "-intro__float__left"},
+            {target: ".saucedb__header__title", type: "-intro__float__left"},
+            {target: ".saucedb__header__subtitle", type: "-intro__float__left"},
+            {target: ".saucedb__details__text", type: "-intro__float__left"}
+        ]);
 
         window.addEventListener("resize", () => {
             updateOffset();
@@ -225,7 +275,7 @@ Debug();
         updateOffset();
 
         function updateOffset() {
-            let sections = document.querySelectorAll(".section");
+            let sections = document.querySelectorAll(".section__header");
 
             sections.forEach((section) => {
                 section.setAttribute("data-offset", (section.getBoundingClientRect().top + window.scrollY) * -0.7);

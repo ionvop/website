@@ -12,6 +12,7 @@ Debug();
         </title>
         <base href="./">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             .main {
@@ -164,5 +165,88 @@ Debug();
             { target: ".about__waifu__info__subject", type: "-intro__float__up" },
             { target: ".about__waifu__details", type: "-intro__float__left" }
         ]);
+
+        let easterEggPhase = 0;
+        let about = document.querySelector(".-header__content__about");
+        let contact = document.querySelector(".-header__content__contact");
+        let sites = document.querySelector(".-header__content__sites");
+        let send = document.querySelector(".contact__button");
+
+        about.addEventListener("mouseenter", () => {
+            switch (easterEggPhase) {
+                case 0:
+                    easterEggPhase = 1;
+                    break;
+                case 4:
+                    easterEggPhase = 5;
+                    break;
+                case 8:
+                    easterEggPhase = 9;
+                    break;
+                default:
+                    easterEggPhase = 0;
+                    break;
+            }
+
+            console.log(easterEggPhase);
+        });
+
+        contact.addEventListener("mouseenter", () => {
+            switch (easterEggPhase) {
+                case 1:
+                    easterEggPhase = 2;
+                    break;
+                case 5:
+                    easterEggPhase = 6;
+                    break;
+                case 9:
+                    easterEggPhase = 10;
+                    break;
+                default:
+                    easterEggPhase = 0;
+                    break;
+            }
+
+            console.log(easterEggPhase);
+        });
+
+        sites.addEventListener("mouseenter", () => {
+            switch (easterEggPhase) {
+                case 2:
+                    easterEggPhase = 3;
+                    break;
+                case 6:
+                    easterEggPhase = 7;
+                    break;
+                case 10:
+                    easterEggPhase = 11;
+                    break;
+                default:
+                    easterEggPhase = 0;
+                    break;
+            }
+
+            console.log(easterEggPhase);
+        });
+
+        send.addEventListener("mouseenter", () => {
+            switch (easterEggPhase) {
+                case 3:
+                    easterEggPhase = 4;
+                    break;
+                case 7:
+                    easterEggPhase = 8;
+                    break;
+                case 11:
+                    alert("Easter egg unlocked!");
+                    easterEggPhase = 0;
+                    break;
+                default:
+                    easterEggPhase = 0;
+                    break;
+            }
+
+            console.log(easterEggPhase);
+        });
     </script>
 </html>
