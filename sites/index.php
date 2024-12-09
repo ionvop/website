@@ -260,12 +260,15 @@ Debug();
             {target: ".ionvop__header__title", type: "-intro__float__left"},
             {target: ".ionvop__header__subtitle", type: "-intro__float__left"},
             {target: ".ionvop__details__text", type: "-intro__float__left"},
+            {target: ".ionvop__details__visit", type: "-intro__float__left"},
             {target: ".mailist__header__title", type: "-intro__float__left"},
             {target: ".mailist__header__subtitle", type: "-intro__float__left"},
             {target: ".mailist__details__text", type: "-intro__float__left"},
+            {target: ".mailist__details__visit", type: "-intro__float__left"},
             {target: ".saucedb__header__title", type: "-intro__float__left"},
             {target: ".saucedb__header__subtitle", type: "-intro__float__left"},
-            {target: ".saucedb__details__text", type: "-intro__float__left"}
+            {target: ".saucedb__details__text", type: "-intro__float__left"},
+            {target: ".saucedb__details__visit", type: "-intro__float__left"}
         ]);
 
         window.addEventListener("resize", () => {
