@@ -218,7 +218,7 @@ Debug();
                 <div class="saucedb section">
                     <div class="saucedb__header section__header -script__parallax -script__new" data-href="/saucedb/">
                         <div class="saucedb__header__title section__header__title -title -center">
-                            saucedb
+                            SauceDB
                         </div>
                         <div class="saucedb__header__subtitle section__header__subtitle -center">
                             A simple database for archiving anime and manga sources.
@@ -226,7 +226,7 @@ Debug();
                     </div>
                     <div class="saucedb__details section__details">
                         <div class="saucedb__details__text section__details__text">
-                            saucedb is a simple database for archiving sources of anime and manga that were hard to find.<br>
+                            SauceDB is a simple database for archiving sources of anime and manga that took a little more effort to find.<br>
                             This was one of my first projects and was mostly for personal use.<br>
                             <br>
                             It was very useful back when I was running a Facebook page called "Anime SauceHub" dedicated to helping people find the source of images they provided.<br>

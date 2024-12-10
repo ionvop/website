@@ -141,7 +141,7 @@ Debug();
                             </div>
                         </div>
                         <div class="about__waifu__details about__details -center">
-                            My love for CHU&sup2; from BanG Dream is like a deep well of happiness. I can't get enough of it. She is what keeps me going forward in life.
+                            My love for CHU&sup2; from BanG Dream is like a deep well of happiness. She is the sole reason why I keep going forward in life.
                         </div>
                     </div>
                 </div>
