@@ -16,7 +16,7 @@ Debug();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             .main {
-                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg.png");
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg.png");
                 background-size: 100%;
             }
 
@@ -79,6 +79,18 @@ Debug();
 
             .about__details {
                 padding: 1rem;
+            }
+
+            @media (orientation: portrait) {
+                .main {
+                    background-size: cover;
+                    background-position: 70% 50%;
+                    background-attachment: fixed;
+                }
+
+                .about {
+                    grid-template-columns: 1fr;
+                }
             }
         </style>
     </head>

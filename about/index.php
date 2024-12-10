@@ -95,6 +95,26 @@ Debug();
                 padding-top: 3rem;
                 line-height: 3rem;
             }
+
+            @media (orientation: portrait) {
+                .main__about {
+                    background-size: cover;
+                    background-position: center;
+                    background-attachment: fixed;
+                }
+
+                .content {
+                    padding: 1rem;
+                }
+
+                .profile {
+                    grid-template-columns: 1fr;
+                }
+
+                .profile__column__avatar {
+                    text-align: center;
+                }
+            }
         </style>
     </head>
     <body>

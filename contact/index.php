@@ -185,6 +185,44 @@ Debug();
                 width: 1.5rem;
                 height: 1.5rem;
             }
+
+            @media (orientation: portrait) {
+                .main__contact {
+                    background-size: cover;
+                    background-position: 30% 50%;
+                    background-attachment: fixed;
+                }
+
+                .socials {
+                    padding: 1rem;
+                }
+
+                .socials__title {
+                    padding: 5rem;
+                    padding-bottom: 1rem;
+                }
+
+                .socials__platform {
+                    padding: 1rem;
+                }
+
+                .contact {
+                    padding: 1rem;
+                    padding-top: 5rem;
+                }
+
+                .contact__assistant {
+                    grid-template-columns: 1fr;
+                }
+
+                .contact__assistant__avatar {
+                    text-align: center;
+                }
+
+                .contact__assistant__chat__container__box__render .item__text {
+                    max-width: 20rem;
+                }
+            }
         </style>
     </head>
     <body>

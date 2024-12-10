@@ -116,6 +116,33 @@ Debug();
                 background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.png");
                 background-size: 100%;
             }
+
+            @media (orientation: portrait) {
+                .main__sites {
+                    background-size: cover;
+                    background-position: 70% 50%;
+                    background-attachment: fixed;
+                }
+
+                .header__title {
+                    padding: 5rem;
+                }
+
+                .header__subtitle {
+                    padding: 5rem;
+                    padding-top: 0rem;
+                }
+
+                .header__section {
+                    grid-template-columns: 1fr;
+                }
+
+                .section__header {
+                    background-size: cover;
+                    background-position: 0% 50%;
+                    background-attachment: fixed;
+                }
+            }
         </style>
     </head>
     <body>

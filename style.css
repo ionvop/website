@@ -262,3 +262,34 @@ body {
         opacity: 100%;
     }
 }
+
+@media (orientation: portrait) {
+    html {
+        font-size: 3vw;
+    }
+
+    .-header__content {
+        grid-template-columns: 1fr;
+        transform: skew(0deg);
+    }
+
+    .-header__content__title {
+        text-align: center;
+    }
+
+    .-unskew {
+        transform: skew(0deg);
+    }
+
+    .-footer {
+        grid-template-columns: 1fr;
+    }
+
+    .-footer__tab {
+        padding: 1rem;
+    }
+
+    .-footer__title {
+        text-align: center;
+    }
+}

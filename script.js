@@ -164,6 +164,10 @@ function ScrollToPosition(element, to, duration = 1000, ease = 'easeInOut') {
 function UpdateParallax() {
     let parallaxes = document.querySelectorAll(".-script__parallax");
 
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        return;
+    }
+
     parallaxes.forEach((parallax) => {
         let offset = (parallax.getAttribute("data-offset") != null) ? parallax.getAttribute("data-offset") : 0;
         parallax.style.backgroundPositionY = document.body.scrollTop * 0.7 + parseFloat(offset) + "px";
