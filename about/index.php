@@ -16,120 +16,112 @@ Debug();
         <link rel="icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
-            .main__about {
+            body > .main {
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg2.png");
                 background-size: 100%;
-            }
+            
+                & > .content {
+                    padding: 10rem;
 
-            .content {
-                padding: 10rem;
-            }
+                    & > .profile {
+                        display: grid;
+                        grid-template-columns: max-content 1fr;
+                        border-radius: 1rem;
+                        background-color: #0005;
+                        backdrop-filter: blur(0.5rem);
+                    
+                        & > .column {
+                            & > .avatar {
+                                padding: 5rem;
+                                padding-bottom: 1rem;
+                            
+                                & > img {
+                                    width: 10rem;
+                                    height: 10rem;
+                                    object-fit: cover;
+                                    border-radius: 10rem;
+                                    user-select: none;
+                                }
+                            }
+                        
+                            & > .username {
+                                padding-top: 0rem;
+                                font-weight: bold;
+                            }
 
-            .profile {
-                display: grid;
-                grid-template-columns: max-content 1fr;
-                border-radius: 1rem;
-                background-color: #0005;
-                backdrop-filter: blur(0.5rem);
-            }
+                            & > .label {
+                                padding-top: 15rem;
+                            }
 
-            .profile__column__avatar {
-                padding: 5rem;
-                padding-bottom: 1rem;
-            }
+                            & > .chu2 {
+                                & > img {
+                                    width: 10rem;
+                                    user-select: none;
+                                }
+                            }
+                        }
 
-            .profile__column__avatar > img {
-                width: 10rem;
-                height: 10rem;
-                object-fit: cover;
-                border-radius: 10rem;
-                user-select: none;
-            }
+                        & > .panel {
+                            & > .banner {
+                                & > img {
+                                    width: 100%;
+                                    border-radius: 1rem;
+                                    user-select: none;
+                                }
+                            }
 
-            .profile__column__username {
-                padding: 1rem;
-                padding-top: 0rem;
-                font-weight: bold;
-            }
+                            & > .about {
+                                & > .title {
+                                    font-weight: bold;
+                                    letter-spacing: 1rem;
+                                }
 
-            .profile__column__titles {
-                padding: 1rem;
-            }
-
-            .profile__column__label {
-                padding: 1rem;
-                padding-top: 15rem;
-            }
-
-            .profile__column__chu2 {
-                padding: 1rem;
-            }
-
-            .profile__column__chu2 > img {
-                width: 10rem;
-                user-select: none;
-            }
-
-            .profile__panel__banner {
-                padding: 1rem;
-            }
-
-            .profile__panel__banner > img {
-                width: 100%;
-                border-radius: 1rem;
-                user-select: none;
-            }
-
-            .profile__panel__about__title {
-                padding: 1rem;
-                font-weight: bold;
-                letter-spacing: 1rem;
-            }
-
-            .profile__panel__about__subtitle {
-                padding: 1rem;
-            }
-
-            .profile__panel__about__content {
-                padding: 1rem;
-                padding-top: 3rem;
-                line-height: 3rem;
+                                & > .content {
+                                    padding-top: 3rem;
+                                    line-height: 3rem;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             @media (orientation: portrait) {
-                .main__about {
+                body > .main {
                     background-size: cover;
                     background-position: center;
                     background-attachment: fixed;
-                }
+                
+                    & > .content {
+                        padding: 1rem;
 
-                .content {
-                    padding: 1rem;
-                }
-
-                .profile {
-                    grid-template-columns: 1fr;
-                }
-
-                .profile__column__avatar {
-                    text-align: center;
+                        & > .profile {
+                            grid-template-columns: 1fr;
+                        
+                            & > .column {
+                                & > .avatar {
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         </style>
     </head>
     <body>
-        <div class="main__about -main -script__parallax">
-            <?=SetHeader()?>
+        <div class="main -main -script__parallax">
+            <?=SetHeader("about")?>
             <div class="content -content">
                 <div class="profile">
-                    <div class="profile__column">
-                        <div class="profile__column__avatar">
+                    <div class="column">
+                        <div class="avatar">
                             <img src="assets/avatar.png">
                         </div>
-                        <div class="profile__column__username -title -center">
+                        <div class="username -pad -title -center">
                             ionvop
                         </div>
-                        <div class="profile__column__titles -subtitle -center">
+                        <div class="titles -pad -subtitle -center">
                             2024 ACM Programming<br>
                             Competition Champion<br>
                             <br>
@@ -141,25 +133,25 @@ Debug();
                             <br>
                             the plap guy
                         </div>
-                        <div class="profile__column__label -subtitle -center">
+                        <div class="label -pad -subtitle -center">
                             my waifu &darr;&darr;&darr;
                         </div>
-                        <div class="profile__column__chu2 -center">
+                        <div class="chu2 -pad -center">
                             <img src="assets/chu2.png">
                         </div>
                     </div>
-                    <div class="profile__panel">
-                        <div class="profile__panel__banner">
+                    <div class="panel">
+                        <div class="banner -pad">
                             <img src="assets/banner.png">
                         </div>
-                        <div class="profile__panel__about">
-                            <div class="profile__panel__about__title -title -center">
+                        <div class="about">
+                            <div class="title -pad -title -center">
                                 About Me
                             </div>
-                            <div class="profile__panel__about__subtitle -subtitle -center">
+                            <div class="subtitle -pad -subtitle -center">
                                 Last updated: 2024-12-04
                             </div>
-                            <div class="profile__panel__about__content">
+                            <div class="content -pad">
                                 I'm currently a 3rd year college student studying Bachelor of Science in Computer Science, and my interests include web development, software development, and game development.<br>
                                 <br>
                                 The programming languages I'm familiar with are VBScript for automations, HTML, CSS, JavaScript, and PHP for web development, C# for GUI applications, Java for legacy applications and self-torture, Python for machine-learning, Brainf*ck for fun, Lua for game modding, GLSL for post-processing effects, Turbowarp (Scratch) for game development, and <span class="-script__new -link" data-href="https://github.com/ionvop/ivpy/">ivpy</span> which is a custom programming language that I made for fun.<br>
@@ -178,16 +170,16 @@ Debug();
     <script src="script.js"></script>
     <script>
         AnimatePage([
-            {target: ".profile", type: "-intro__fade"},
-            {target: ".profile__column__avatar > img", type: "-intro__float__left"},
-            {target: ".profile__column__username", type: "-intro__float__left"},
-            {target: ".profile__column__titles", type: "-intro__float__left"},
-            {target: ".profile__column__label", type: "-intro__float__left"},
-            {target: ".profile__column__chu2", type: "-intro__float__left"},
-            {target: ".profile__panel__banner", type: "-intro__float__left"},
-            {target: ".profile__panel__about__title", type: "-intro__float__left"},
-            {target: ".profile__panel__about__subtitle", type: "-intro__float__left"},
-            {target: ".profile__panel__about__content", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile", type: "-intro__fade"},
+            {target: "body > .main > .content > .profile > .column > .avatar > img", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .column > .username", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .column > .titles", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .column > .label", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .column > .chu2", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .panel > .banner", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .panel > .about > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .panel > .about > .subtitle", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .panel > .about > .content", type: "-intro__float__left"},
         ]);
     </script>
 </html>
