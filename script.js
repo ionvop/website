@@ -21,16 +21,14 @@ GlobalEventListener("click", ".-script__link", (element, event) => {
     PreloadPage(element.getAttribute("data-href"));
 
     if (element.classList.contains("-intro")) {
+        element.style.opacity = "";
         element.classList.remove("-intro");
     }
 
-    element.style.transitionDuration = "1s";
-    element.style.filter = "blur(0rem)";
-    element.style.opacity = "100%";
+    element.style.filter = "brightness(100%)";
 
     setTimeout(() => {
-        element.style.filter = "blur(1rem)";
-        element.style.opacity = "0%";
+        element.style.filter = "brightness(200%)";
     }, 0);
 
     AnimateOutro(element.getAttribute("data-href"));
@@ -40,33 +38,39 @@ GlobalEventListener("click", ".-script__new", element => {
     window.open(element.getAttribute("data-href"));
 });
 
-function AnimatePage(contentTimeline) {
+async function AnimatePage(contentTimeline) {
     let headerTimeline = [
         { target: ".-main", type: "-intro__fade" },
-        { target: ".-header__content__title", type: "-intro__float__up" },
-        { target: ".-header__content__about", type: "-intro__float__left" },
-        { target: ".-header__content__contact", type: "-intro__float__left" },
-        { target: ".-header__content__sites", type: "-intro__float__left" }
+        { target: ".-header > .content > .title", type: "-intro__float__up" },
+        { target: ".-header > .content > .home", type: "-intro__float__left" },
+        { target: ".-header > .content > .about", type: "-intro__float__left" },
+        { target: ".-header > .content > .contact", type: "-intro__float__left" },
+        { target: ".-header > .content > .sites", type: "-intro__float__left" }
     ]
 
     let footerTimeline = [
-        { target: ".-footer__title", type: "-intro__float__down" },
-        { target: ".-footer__home", type: "-intro__float__left" },
-        { target: ".-footer__about", type: "-intro__float__left" },
-        { target: ".-footer__contact", type: "-intro__float__left" },
-        { target: ".-footer__join", type: "-intro__float__left" }
+        { target: ".-footer > .title", type: "-intro__float__down" },
+        { target: ".-footer > .home", type: "-intro__float__left" },
+        { target: ".-footer > .about", type: "-intro__float__left" },
+        { target: ".-footer > .contact", type: "-intro__float__left" },
+        { target: ".-footer > .join", type: "-intro__float__left" }
     ]
 
     let animationTimeline = [...headerTimeline, ...contentTimeline, ...footerTimeline];
-    let delay = 0;
 
-    animationTimeline.forEach((animation) => {
+    for (let animation of animationTimeline) {
         let element = document.querySelector(animation.target);
-        element.style.animationDelay = delay + "s";
-        element.classList.add("-intro");
-        element.classList.add(animation.type);
-        delay += 0.1;
-    });
+        element.style.opacity = "0%";
+    }
+
+    for (let animation of animationTimeline) {
+        WaitForElementVisible(animation.target).then(element => {
+            element.classList.add("-intro");
+            element.classList.add(animation.type);
+        });
+        
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
 }
 
 function AnimateOutro(redirect) {
@@ -77,14 +81,14 @@ function AnimateOutro(redirect) {
 
     let delay = 0;
 
-    elements.forEach((element) => {
+    for (let element of elements) {
         let animationType = "";
 
-        element.classList.forEach((className) => {
+        for (let className of element.classList) {
             if (className.startsWith("-intro__")) {
                 animationType = className;
             }
-        });
+        }
 
         if (animationType == "") {
             return;
@@ -98,7 +102,7 @@ function AnimateOutro(redirect) {
         }, 10);
 
         delay += 0.1;
-    });
+    }
 
     setTimeout(() => {
         location.href = redirect;
@@ -168,8 +172,53 @@ function UpdateParallax() {
         return;
     }
 
-    parallaxes.forEach((parallax) => {
+    for (let parallax of parallaxes) {
         let offset = (parallax.getAttribute("data-offset") != null) ? parallax.getAttribute("data-offset") : 0;
         parallax.style.backgroundPositionY = document.body.scrollTop * 0.7 + parseFloat(offset) + "px";
-    })
+    }
+}
+
+function WaitForElementVisible(selector, options = {}) {
+    return new Promise(resolve => {
+        const element = document.querySelector(selector);
+
+        // If element exists and is already visible
+        if (element) {
+            const rect = element.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isVisible) {
+                return resolve(element);
+            }
+        }
+
+        // Otherwise, observe until visible
+        const observer = new IntersectionObserver(entries => {
+            for (const entry of entries) {
+                if (entry.isIntersecting) {
+                    observer.disconnect();
+                    resolve(entry.target);
+                }
+            }
+        }, options);
+
+        if (element) {
+            observer.observe(element);
+        } else {
+            // fallback if element doesn't exist yet
+            const mo = new MutationObserver(() => {
+                const el = document.querySelector(selector);
+                if (el) {
+                    mo.disconnect();
+                    observer.observe(el);
+                }
+            });
+            mo.observe(document.body, { childList: true, subtree: true });
+        }
+    });
+}
+
+function ElementFromHTML(html) {
+    let template = document.createElement("template");
+    template.innerHTML = html;
+    return template.content.firstElementChild;
 }
