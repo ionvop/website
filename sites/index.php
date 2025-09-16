@@ -130,6 +130,12 @@ Debug();
                             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/nicka.png");
                         }
                     }
+
+                    & > .wcolor {
+                        & > .header {
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/wcolor.png");
+                        }
+                    }
                 }
             }
 
@@ -289,7 +295,7 @@ Debug();
                     </div>
                 </div>
                 <div class="nicka section">
-                    <div class="header -script__parallax -script__new" data-href="/saucedb/">
+                    <div class="header -script__parallax -script__new" data-href="https://nickarental.com/">
                         <div class="title -title -center">
                             Nicka's Bohol Motorbike & Car Rental
                         </div>
@@ -306,7 +312,31 @@ Debug();
                             It was not my strong suite so I hope my future commissions wouldn't be too similar.
                         </div>
                         <div class="visit -center">
-                            <button class="-button -script__new" data-href="/saucedb/">
+                            <button class="-button -script__new" data-href="https://nickarental.com/">
+                                Visit Page
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="wcolor section">
+                    <div class="header -script__parallax -script__new" data-href="https://wplace.ionvop.com/color-converter/">
+                        <div class="title -title -center">
+                            Wplace Color Converter
+                        </div>
+                        <div class="subtitle -center">
+                            oh hell nah not another wplace color converter
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="text">
+                            Just another simple color conversion tool that converts the colors from a pixel art/image to the colors available in Wplace<br>
+                            It is one of the already many existing color conversion tools for Wplace out there.<br>
+                            <br>
+                            Unlike many other tools such as PEPOAFONSO/color_converter_wplace and Yet Another Wplace Color Converter,<br>
+                            this tool allows the ability to estimate how long it would take to finish a project solo with and without the flag bonus.
+                        </div>
+                        <div class="visit -center">
+                            <button class="-button -script__new" data-href="https://wplace.ionvop.com/color-converter/">
                                 Visit Page
                             </button>
                         </div>
@@ -341,7 +371,15 @@ Debug();
             {target: "body > .main > .content > .saucedb > .header > .title", type: "-intro__float__left"},
             {target: "body > .main > .content > .saucedb > .header > .subtitle", type: "-intro__float__left"},
             {target: "body > .main > .content > .saucedb > .details > .text", type: "-intro__float__left"},
-            {target: "body > .main > .content > .saucedb > .details > .visit", type: "-intro__float__left"}
+            {target: "body > .main > .content > .saucedb > .details > .visit", type: "-intro__float__left"},
+            {target: "body > .main > .content > .nicka > .header > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .nicka > .header > .subtitle", type: "-intro__float__left"},
+            {target: "body > .main > .content > .nicka > .details > .text", type: "-intro__float__left"},
+            {target: "body > .main > .content > .nicka > .details > .visit", type: "-intro__float__left"},
+            {target: "body > .main > .content > .wcolor > .header > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .wcolor > .header > .subtitle", type: "-intro__float__left"},
+            {target: "body > .main > .content > .wcolor > .details > .text", type: "-intro__float__left"},
+            {target: "body > .main > .content > .wcolor > .details > .visit", type: "-intro__float__left"},
         ]);
 
         window.addEventListener("resize", () => {
