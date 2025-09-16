@@ -16,205 +16,227 @@ Debug();
         <link rel="icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
-            .main__sites {
+            body > .main {
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg4.png");
                 background-size: 100%;
-            }
 
-            .header__title {
-                padding: 10rem;
-                padding-bottom: 5rem;
-                font-size: 3rem;
-                font-weight: bolder;
-            }
+                & > .content {
+                    & > .header {
+                        & > .title {
+                            padding: 10rem;
+                            padding-bottom: 5rem;
+                            font-size: 2rem;
+                            font-weight: bolder;
+                        }
 
-            .header__subtitle {
-                padding: 10rem;
-                padding-top: 0rem;
-            }
+                        & > .subtitle {
+                            padding: 10rem;
+                            padding-top: 0rem;
+                        }
 
-            .header__section {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                background-color: #111;
-            }
+                        & > .section {
+                            display: grid;
+                            grid-template-columns: repeat(3, 1fr);
+                            background-color: #111;
+                        
+                            & > .card {
+                                padding: 3rem;
 
-            .header__section__card {
-                padding: 3rem;
-            }
+                                & > .info {
+                                    display: grid;
+                                    grid-template-columns: max-content 1fr;
+                                
+                                    & > .icon {
+                                        padding: 1rem;
+                                    
+                                        & > svg {
+                                            width: 3rem;
+                                            height: 3rem;
+                                        }
+                                    }
 
-            .header__section__info {
-                display: grid;
-                grid-template-columns: max-content 1fr;
-            }
+                                    & > .subject {
+                                        padding: 1rem;
+                                        font-weight: bold;
+                                    }
+                                }
 
-            .header__section__info__icon {
-                padding: 1rem;
-            }
+                                & > .details {
+                                    padding: 1rem;
+                                }
+                            }
+                        }
+                    }
 
-            .header__section__info__icon > svg {
-                width: 3rem;
-                height: 3rem;
-            }
+                    & > .section {
+                        & > .header {
+                            cursor: pointer;
+                            filter: brightness(100%);
+                            transition: filter 0.1s;
+                            background-size: 100%;
 
-            .header__section__info__subject {
-                padding: 1rem;
-                font-weight: bold;
-            }
+                            &:hover {
+                                filter: brightness(150%);
+                            }
+                        
+                            & > .title {
+                                padding: 10rem;
+                                padding-bottom: 5rem;
+                                font-weight: bold;
+                            }
 
-            .header__section__details {
-                padding: 1rem;
-            }
+                            & > .subtitle {
+                                padding: 10rem;
+                                padding-top: 0rem;
+                            }
+                        }
 
-            .section__header {
-                cursor: pointer;
-                filter: brightness(100%);
-                transition: filter 0.1s;
-            }
+                        & > .details {
+                            background-color: #111;
+                        
+                            & > .text {
+                                padding: 5rem;
+                                line-height: 3rem;
+                            }
 
-            .section__header:hover {
-                filter: brightness(150%);
-            }
+                            & > .visit {
+                                padding: 1rem;
+                                padding-top: 0rem;
+                                padding-bottom: 10rem;
+                            }
+                        }
+                    }
 
-            .section__header__title {
-                padding: 10rem;
-                padding-bottom: 5rem;
-                font-weight: bold;
-            }
+                    & > .ionvop {
+                        & > .header {
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.png");
+                        }
+                    }
 
-            .section__header__subtitle {
-                padding: 10rem;
-                padding-top: 0rem;
-            }
+                    & > .mailist {
+                        & > .header {
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/mailist.png");
+                        }
+                    }
 
-            .section__details {
-                background-color: #111;
-            }
+                    & > .saucedb {
+                        & > .header {
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.png");
+                        }
+                    }
 
-            .section__details__text {
-                padding: 5rem;
-                line-height: 3rem;
-            }
-
-            .section__details__visit {
-                padding: 1rem;
-                padding-top: 0rem;
-                padding-bottom: 10rem;
-            }
-
-            .ionvop__header {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.png");
-                background-size: 100%;
-            }
-
-            .mailist__header {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/mailist.png");
-                background-size: 100%;
-            }
-
-            .saucedb__header {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.png");
-                background-size: 100%;
+                    & > .nicka {
+                        & > .header {
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/nicka.png");
+                        }
+                    }
+                }
             }
 
             @media (orientation: portrait) {
-                .main__sites {
+                body > .main {
                     background-size: cover;
                     background-position: 70% 50%;
                     background-attachment: fixed;
-                }
 
-                .header__title {
-                    padding: 5rem;
-                }
+                    & > .content {
+                        & > .header {
+                            & > .title {
+                                padding: 5rem;
+                            }
 
-                .header__subtitle {
-                    padding: 5rem;
-                    padding-top: 0rem;
-                }
+                            & > .subtitle {
+                                padding: 5rem;
+                                padding-top: 0rem;
+                            }
 
-                .header__section {
-                    grid-template-columns: 1fr;
-                }
+                            & > .section {
+                                grid-template-columns: 1fr;
+                            }
+                        }
 
-                .section__header {
-                    background-size: cover;
-                    background-position: 0% 50%;
-                    background-attachment: fixed;
+                        & > .section {
+                            & > .header {
+                                background-size: cover;
+                                background-position: 0% 50%;
+                                background-attachment: fixed;
+                            }
+                        }
+                    }
                 }
             }
         </style>
     </head>
     <body>
-        <div class="main__sites -main -script__parallax">
-            <?=SetHeader()?>
+        <div class="main -main -script__parallax">
+            <?=SetHeader("sites")?>
             <div class="content -content">
                 <div class="header">
-                    <div class="header__title -center">
+                    <div class="title -center">
                         Welcome to my sites
                     </div>
-                    <div class="header__subtitle -title -center">
+                    <div class="subtitle -title -center">
                         These are the sites and services I made
                     </div>
-                    <div class="header__section">
-                        <div class="header__section__apps header__section__card">
-                            <div class="header__section__apps__info header__section__info">
-                                <div class="header__section__apps__info__icon header__section__info__icon">
+                    <div class="section">
+                        <div class="apps card">
+                            <div class="info">
+                                <div class="icon">
                                     <?=Icon("widgets")?>
                                 </div>
-                                <div class="header__section__apps__info__subject header__section__info__subject -title -center">
+                                <div class="subject -title -center">
                                     Apps
                                 </div>
                             </div>
-                            <div class="header__section__apps__details header__section__details -center">
+                            <div class="details -center">
                                 I make apps for web and mobile using HTML, CSS, and JavaScript.<br>
                                 All my mobile apps are simply a WebView of the web app.
                             </div>
                         </div>
-                        <div class="header__section__socials header__section__card">
-                            <div class="header__section__socials__info header__section__info">
-                                <div class="header__section__socials__info__icon header__section__info__icon">
+                        <div class="socials card">
+                            <div class="info">
+                                <div class="icon">
                                     <?=Icon("group")?>
                                 </div>
-                                <div class="header__section__socials__info__subject header__section__info__subject -title -center">
+                                <div class="subject -title -center">
                                     Platforms
                                 </div>
                             </div>
-                            <div class="header__section__socials__details header__section__details -center">
+                            <div class="details -center">
                                 I make social platforms using HTML, CSS, JavaScript, and PHP.<br>
                                 The social platforms I make are intended for small-scale communities.
                             </div>
                         </div>
-                        <div class="header__section__portfolio header__section__card">
-                            <div class="header__section__portfolio__info header__section__info">
-                                <div class="header__section__portfolio__info__icon header__section__info__icon">
+                        <div class="portfolio card">
+                            <div class="info">
+                                <div class="icon">
                                     <?=Icon("folder_shared")?>
                                 </div>
-                                <div class="header__section__portfolio__info__subject header__section__info__subject -title -center">
+                                <div class="subject -title -center">
                                     Personal
                                 </div>
                             </div>
-                            <div class="header__section__portfolio__details header__section__details -center">
+                            <div class="details -center">
                                 I make webpages to put all of the things I've made from my other hobbies.<br>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="ionvop section">
-                    <div class="ionvop__header section__header -script__parallax -script__new" data-href="/home/">
-                        <div class="ionvop__header__title section__header__title -title -center">
+                    <div class="header -script__parallax -script__new" data-href="/home/">
+                        <div class="title -title -center">
                             ionvop
                         </div>
-                        <div class="ionvop__header__subtitle section__header__subtitle -center">
+                        <div class="subtitle -center">
                             Click here to visit this website
                         </div>
                     </div>
-                    <div class="ionvop__details section__details">
-                        <div class="ionvop__details__text section__details__text">
+                    <div class="details">
+                        <div class="text">
                             This is the landing page for this website.<br>
                             You are currently here right now.
                         </div>
-                        <div class="ionvop__details__visit section__details__visit -center">
+                        <div class="visit -center">
                             <button class="-button -script__new" data-href="/home/">
                                 Visit Page
                             </button>
@@ -222,20 +244,20 @@ Debug();
                     </div>
                 </div>
                 <div class="mailist section">
-                    <div class="mailist__header section__header -script__parallax -script__new" data-href="/mailist/">
-                        <div class="mailist__header__title section__header__title -title -center">
+                    <div class="header -script__parallax -script__new" data-href="/mailist/">
+                        <div class="title -title -center">
                             mailist
                         </div>
-                        <div class="mailist__header__subtitle section__header__subtitle -center">
+                        <div class="subtitle -center">
                             A simple platform for custom maimai charts
                         </div>
                     </div>
-                    <div class="mailist__details section__details">
-                        <div class="mailist__details__text section__details__text">
+                    <div class="details">
+                        <div class="text">
                             mailist offers a platform for sharing, discovering, and enjoying custom maimai charts.<br>
                             The goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.
                         </div>
-                        <div class="mailist__details__visit section__details__visit -center">
+                        <div class="visit -center">
                             <button class="-button -script__new" data-href="/mailist/">
                                 Visit Page
                             </button>
@@ -243,23 +265,47 @@ Debug();
                     </div>
                 </div>
                 <div class="saucedb section">
-                    <div class="saucedb__header section__header -script__parallax -script__new" data-href="/saucedb/">
-                        <div class="saucedb__header__title section__header__title -title -center">
+                    <div class="header -script__parallax -script__new" data-href="/saucedb/">
+                        <div class="title -title -center">
                             SauceDB
                         </div>
-                        <div class="saucedb__header__subtitle section__header__subtitle -center">
+                        <div class="subtitle -center">
                             A simple database for archiving anime and manga sources.
                         </div>
                     </div>
-                    <div class="saucedb__details section__details">
-                        <div class="saucedb__details__text section__details__text">
+                    <div class="details">
+                        <div class="text">
                             SauceDB is a simple database for archiving sources of anime and manga that took a little more effort to find.<br>
                             This was one of my first projects and was mostly for personal use.<br>
                             <br>
                             It was very useful back when I was running a Facebook page called "Anime SauceHub" dedicated to helping people find the source of images they provided.<br>
                             Unfortunately, the page was taken down and I no longer do source hunting.
                         </div>
-                        <div class="saucedb__details__visit section__details__visit -center">
+                        <div class="visit -center">
+                            <button class="-button -script__new" data-href="/saucedb/">
+                                Visit Page
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="nicka section">
+                    <div class="header -script__parallax -script__new" data-href="/saucedb/">
+                        <div class="title -title -center">
+                            Nicka's Bohol Motorbike & Car Rental
+                        </div>
+                        <div class="subtitle -center">
+                            An early-2025 commission
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="text">
+                            Nicka's Bohol Motorbike & Car Rental is a service that provide top-quality motorbikes and cars for rent in Bohol, Philippines.<br>
+                            Vehicles are well-maintained, reliable, and perfect for exploring the beautiful island of Bohol at your own pace.<br>
+                            <br>
+                            This was my first time working on a service portfolio kind of website that doesn't have much user interactivity.<br>
+                            It was not my strong suite so I hope my future commissions wouldn't be too similar.
+                        </div>
+                        <div class="visit -center">
                             <button class="-button -script__new" data-href="/saucedb/">
                                 Visit Page
                             </button>
@@ -273,29 +319,29 @@ Debug();
     <script src="script.js"></script>
     <script>
         AnimatePage([
-            {target: ".header__title", type: "-intro__float__left"},
-            {target: ".header__subtitle", type: "-intro__float__left"},
-            {target: ".header__section__apps__info__icon", type: "-intro__float__up"},
-            {target: ".header__section__apps__info__subject", type: "-intro__float__up"},
-            {target: ".header__section__apps__details", type: "-intro__float__left"},
-            {target: ".header__section__socials__info__icon", type: "-intro__float__up"},
-            {target: ".header__section__socials__info__subject", type: "-intro__float__up"},
-            {target: ".header__section__socials__details", type: "-intro__float__left"},
-            {target: ".header__section__portfolio__info__icon", type: "-intro__float__up"},
-            {target: ".header__section__portfolio__info__subject", type: "-intro__float__up"},
-            {target: ".header__section__portfolio__details", type: "-intro__float__left"},
-            {target: ".ionvop__header__title", type: "-intro__float__left"},
-            {target: ".ionvop__header__subtitle", type: "-intro__float__left"},
-            {target: ".ionvop__details__text", type: "-intro__float__left"},
-            {target: ".ionvop__details__visit", type: "-intro__float__left"},
-            {target: ".mailist__header__title", type: "-intro__float__left"},
-            {target: ".mailist__header__subtitle", type: "-intro__float__left"},
-            {target: ".mailist__details__text", type: "-intro__float__left"},
-            {target: ".mailist__details__visit", type: "-intro__float__left"},
-            {target: ".saucedb__header__title", type: "-intro__float__left"},
-            {target: ".saucedb__header__subtitle", type: "-intro__float__left"},
-            {target: ".saucedb__details__text", type: "-intro__float__left"},
-            {target: ".saucedb__details__visit", type: "-intro__float__left"}
+            {target: "body > .main > .content > .header > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .header > .subtitle", type: "-intro__float__left"},
+            {target: "body > .main > .content > .header > .section > .apps > .info > .icon", type: "-intro__float__up"},
+            {target: "body > .main > .content > .header > .section > .apps > .info > .subject", type: "-intro__float__up"},
+            {target: "body > .main > .content > .header > .section > .apps > .details", type: "-intro__float__left"},
+            {target: "body > .main > .content > .header > .section > .socials > .info > .icon", type: "-intro__float__up"},
+            {target: "body > .main > .content > .header > .section > .socials > .info > .subject", type: "-intro__float__up"},
+            {target: "body > .main > .content > .header > .section > .socials > .details", type: "-intro__float__left"},
+            {target: "body > .main > .content > .header > .section > .portfolio > .info > .icon", type: "-intro__float__up"},
+            {target: "body > .main > .content > .header > .section > .portfolio > .info > .subject", type: "-intro__float__up"},
+            {target: "body > .main > .content > .header > .section > .portfolio > .details", type: "-intro__float__left"},
+            {target: "body > .main > .content > .ionvop > .header > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .ionvop > .header > .subtitle", type: "-intro__float__left"},
+            {target: "body > .main > .content > .ionvop > .details > .text", type: "-intro__float__left"},
+            {target: "body > .main > .content > .ionvop > .details > .visit", type: "-intro__float__left"},
+            {target: "body > .main > .content > .mailist > .header > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .mailist > .header > .subtitle", type: "-intro__float__left"},
+            {target: "body > .main > .content > .mailist > .details > .text", type: "-intro__float__left"},
+            {target: "body > .main > .content > .mailist > .details > .visit", type: "-intro__float__left"},
+            {target: "body > .main > .content > .saucedb > .header > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .saucedb > .header > .subtitle", type: "-intro__float__left"},
+            {target: "body > .main > .content > .saucedb > .details > .text", type: "-intro__float__left"},
+            {target: "body > .main > .content > .saucedb > .details > .visit", type: "-intro__float__left"}
         ]);
 
         window.addEventListener("resize", () => {
@@ -305,11 +351,11 @@ Debug();
         updateOffset();
 
         function updateOffset() {
-            let sections = document.querySelectorAll(".section__header");
+            let sections = document.querySelectorAll("body > .main > .content > .header");
 
-            sections.forEach((section) => {
+            for (let section of sections) {
                 section.setAttribute("data-offset", (section.getBoundingClientRect().top + window.scrollY) * -0.7);
-            });
+            }
 
             UpdateParallax();
         }
