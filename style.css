@@ -11,22 +11,18 @@
     outline: 0.1rem solid #0f0;
 }
 
-html {
-    font-size: 1vw;
-}
-
 body {
     background-color: #000;
     color: #fff;
     font-family: 'Exo 2', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 0rem;
     font-weight: normal;
 }
 
 .-button {
     padding: 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     background-color: var(--theme);
     font-family: 'Exo 2', sans-serif;
     color: #fff;
@@ -53,7 +49,7 @@ body {
 .-input {
     width: 100%;
     padding: 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     background-color: #fff;
     font-family: 'Exo 2', sans-serif;
     color: #111;
@@ -91,12 +87,16 @@ body {
     color: var(--theme--contrast);
 }
 
+.-pad {
+    padding: 1rem;
+}
+
 .-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .-subtitle {
-    font-size: 1rem;
+    font-size: 0.7rem;
     color: #aaa;
 }
 
@@ -112,45 +112,55 @@ body {
     overflow: hidden;
     background-color: #111;
     user-select: none;
-}
 
-.-header__content {
-    display: grid;
-    grid-template-columns: max-content 1fr repeat(3, max-content) 3rem;
-    transform: skewX(-10deg);
-}
+    & > .content {
+        display: grid;
+        grid-template-columns: max-content 1fr repeat(4, max-content) 3rem;
+        transform: skewX(-10deg);
+    
+        & > .title {
+            padding-left: 3rem;
+            padding-right: 3rem;
+            font-size: 2rem;
+            font-weight: bolder;
+            cursor: pointer;
+        }
 
-.-header__content__title {
-    padding: 1rem 3rem;
-    font-size: 3rem;
-    font-weight: bolder;
-    cursor: pointer;
-}
+        & > .sites {
+            background-color: var(--theme);
 
-.-header__content__sites {
-    background-color: var(--theme);
-}
+            &:hover {
+                background-color: var(--theme--light);
+            }
+        }
 
-.-header__content__sites:hover {
-    background-color: var(--theme--light);
-}
+        & > .sites--selected {
+            background-color: var(--theme--light);
+        }
 
-.-header__tab {
-    padding: 1rem 3rem;
-    font-size: 2rem;
-    border-left: var(--theme--dark) 0.1rem solid;
-    border-right: var(--theme--dark) 0.1rem solid;
-    transition-duration: 0.1s;
-    cursor: pointer;
-}
+        & > .tab {
+            padding-left: 3rem;
+            padding-right: 3rem;
+            font-size: 1.5rem;
+            border-left: var(--theme--dark) 0.1rem solid;
+            border-right: var(--theme--dark) 0.1rem solid;
+            transition-duration: 0.1s;
+            cursor: pointer;
+        
+            &:hover {
+                box-shadow: 0rem -0.5rem 0rem 0rem var(--theme--light) inset;
+            }
+        }
 
-.-header__tab:hover {
-    box-shadow: 0rem -0.5rem 0rem 0rem var(--theme--light) inset;
-}
+        & > .tab--selected {
+            box-shadow: 0rem -0.5rem 0rem 0rem var(--theme--light) inset;
+        }
+    }
 
-.-header__border {
-    height: 0.2rem;
-    background-color: var(--theme);
+    & > .border {
+        height: 0.2rem;
+        background-color: var(--theme);
+    }
 }
 
 .-content {
@@ -163,21 +173,21 @@ body {
     background-color: var(--theme--dark);
     user-select: none;
     overflow: hidden;
-}
 
-.-footer__title {
-    padding: 3rem;
-}
+    & > .title {
+        padding: 3rem;
+    }
 
-.-footer__tab {
-    color: var(--theme--light);
-    transition-duration: 0.1s;
-    padding: 2rem;
-    cursor: pointer;
-}
+    & > .tab {
+        color: var(--theme--light);
+        transition-duration: 0.1s;
+        padding: 2rem;
+        cursor: pointer;
 
-.-footer__tab:hover {
-    color: #fff;
+        &:hover {
+            color: #fff;
+        }
+    }
 }
 
 .-intro {
@@ -268,13 +278,15 @@ body {
         font-size: 3vw;
     }
 
-    .-header__content {
-        grid-template-columns: 1fr;
-        transform: skew(0deg);
-    }
+    .-header {
+        & > .content {
+            grid-template-columns: 1fr;
+            transform: skew(0deg);
 
-    .-header__content__title {
-        text-align: center;
+            & > .title {
+                text-align: center;
+            }
+        }
     }
 
     .-unskew {
@@ -283,13 +295,13 @@ body {
 
     .-footer {
         grid-template-columns: 1fr;
-    }
 
-    .-footer__tab {
-        padding: 1rem;
-    }
-
-    .-footer__title {
-        text-align: center;
+        & > .tab {
+            padding: 1rem;
+        }
+    
+        & > .title {
+            text-align: center;
+        }
     }
 }
