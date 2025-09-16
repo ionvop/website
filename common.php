@@ -11,34 +11,44 @@ function Debug() {
     error_reporting(E_ALL);
 }
 
-function SetHeader() {
+function SetHeader($page) {
+    $selected = function($a, $b) {
+        if ($a == $b && $b == "sites") return "sites--selected";
+        return $a == $b ? "tab--selected" : "";
+    };
+
     return <<<HTML
         <div class="-header">
-            <div class="-header__content">
-                <div class="-header__content__title -title -script__link" data-href="./">
+            <div class="content">
+                <div class="title -pad -title -script__link" data-href="./">
                     <div class="-unskew">
                         ionvop
                     </div>
                 </div>
                 <div></div>
-                <div class="-header__content__about -header__tab -center__flex -script__link" data-href="about/">
+                <div class="home tab {$selected($page, 'home')} -pad -center__flex -script__link" data-href="./">
+                    <div class="-unskew">
+                        Home
+                    </div>
+                </div>
+                <div class="about tab {$selected($page, 'about')} -pad -center__flex -script__link" data-href="about/">
                     <div class="-unskew">
                         About
                     </div>
                 </div>
-                <div class="-header__content__contact -header__tab -center__flex -script__link" data-href="contact/">
+                <div class="contact tab {$selected($page, 'contact')} -pad -center__flex -script__link" data-href="contact/">
                     <div class="-unskew">
                         Contact
                     </div>
                 </div>
-                <div class="-header__content__sites -header__tab -center__flex -script__link" data-href="sites/">
+                <div class="sites tab {$selected($page, 'sites')} -pad -center__flex -script__link" data-href="sites/">
                     <div class="-unskew">
                         Sites
                     </div>
                 </div>
                 <div></div>
             </div>
-            <div class="-header__border"></div>
+            <div class="border"></div>
         </div>
     HTML;
 }
@@ -46,20 +56,20 @@ function SetHeader() {
 function SetFooter() {
     return <<<HTML
         <div class="-footer">
-            <div class="-footer__title">
-                &copy; 2024 ionvop
+            <div class="title">
+                &copy; 2025 ionvop
             </div>
             <div></div>
-            <div class="-footer__home -footer__tab -center__flex -script__link" data-href="./">
+            <div class="home tab -center__flex -script__link" data-href="./">
                 Home
             </div>
-            <div class="-footer__about -footer__tab -center__flex -script__link" data-href="about/">
+            <div class="about tab -center__flex -script__link" data-href="about/">
                 About
             </div>
-            <div class="-footer__contact -footer__tab -center__flex -script__link" data-href="contact/">
+            <div class="contact tab -center__flex -script__link" data-href="contact/">
                 Contact
             </div>
-            <div class="-footer__join -footer__tab -center__flex -script__link" data-href="sites/">
+            <div class="join tab -center__flex -script__link" data-href="sites/">
                 Sites
             </div>
             <div></div>
