@@ -329,6 +329,72 @@ include("common.php");
         let inputReply = document.getElementById("inputReply");
         let btnSend = document.getElementById("btnSend");
 
+        const SESSION_KEY = "chatSessionKey";
+        const ENDPOINT = "api/chat/";
+
+        function getSessionKey() {
+            return localStorage.getItem(SESSION_KEY);
+        }
+
+        function setSessionKey(key) {
+            localStorage.setItem(SESSION_KEY, key);
+        }
+
+        function escapeHtml(text) {
+            let div = document.createElement("div");
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function renderMessage(role, content, animate = true) {
+            let isUser = role == "user";
+            let body = isUser ? escapeHtml(content) : marked.parse(content);
+            let intro = animate ? " -intro -intro__float__" + (isUser ? "right" : "left") : "";
+            let item = elementFromHTML(/*html*/`
+                <div class="item ${isUser ? "item--user" : "item--ai"}">
+                    <div></div>
+                    <div class="text ${isUser ? "" : "item--ai__text"}${intro}">
+                        ${body}
+                    </div>
+                </div>
+            `);
+
+            panelRender.appendChild(item);
+
+            for (let anchor of item.querySelectorAll("a")) {
+                anchor.setAttribute("target", "_blank");
+            }
+
+            scrollToPosition(panelBox, 1, 1000, "easeInOut");
+        }
+
+        async function restoreHistory() {
+            let key = getSessionKey();
+
+            if (key == null) {
+                return;
+            }
+
+            let response = await fetch(ENDPOINT + "?key=" + encodeURIComponent(key));
+
+            if (!response.ok) {
+                localStorage.removeItem(SESSION_KEY);
+                return;
+            }
+
+            let data = await response.json();
+
+            if (data.messages == null || data.messages.length == 0) {
+                return;
+            }
+
+            panelRender.innerHTML = "";
+
+            for (let message of data.messages) {
+                renderMessage(message.role, message.content, false);
+            }
+        }
+
         animatePage([
             {target: "body > .main > .content > .socials > .title", type: "-intro__float__left"},
             {target: "body > .main > .content > .socials > .platforms > .discord", type: "-intro__float__up"},
@@ -349,82 +415,58 @@ include("common.php");
         }
 
         btnSend.onclick = async () => {
-            if (inputReply.value == "") return;
+            let content = inputReply.value.trim();
 
-            let item = elementFromHTML(/*html*/`
-                <div class="item item--user">
-                    <div></div>
-                    <div class="text -intro -intro__float__right">
-                        ${inputReply.value}
-                    </div>
-                </div>
-            `);
+            if (content == "") return;
 
-            panelRender.appendChild(item);
+            renderMessage("user", content);
 
             inputReply.value = "";
             inputReply.disabled = true;
             btnSend.disabled = true;
             panelLoader.style.height = "auto";
             panelLoader.style.opacity = "100%";
-            scrollToPosition(panelBox, 1, 1000, "easeInOut");
-            let history = [];
-            let messages = panelRender.querySelectorAll(".item");
 
-            for (let message of messages) {
-                let text = message.querySelector(".text").innerText;
-                let role = "";
+            try {
+                let response = await fetch(ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        key: getSessionKey() ?? undefined,
+                        content: content
+                    })
+                });
 
-                if (message.classList.contains("item--user")) {
-                    role = "user";
-                } else if (message.classList.contains("item--ai")) {
-                    role = "assistant";
+                let data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || ("Request failed (" + response.status + ")"));
                 }
 
-                history.push({
-                    role: role,
-                    content: text
-                });
-            }
+                setSessionKey(data.key);
 
-            console.log(history);
+                let url = new URL(window.location.href);
+                url.searchParams.delete("m");
+                window.history.replaceState({}, "", url);
 
-            let response = await fetch("server.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    method: "sendMessage",
-                    history: history
-                })
-            })
+                panelLoader.style.opacity = "0%";
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                panelLoader.style.height = "0rem";
 
-            response = await response.json();
-            console.log(response);
-            panelLoader.style.opacity = "0%";
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            panelLoader.style.height = "0rem";
-
-            item = elementFromHTML(/*html*/`
-                <div class="item item--ai">
-                    <div></div>
-                    <div class="item--ai__text text -intro -intro__float__left">
-                        ${marked.parse(response.message)}
-                    </div>
-                </div>
-            `);
-
-            panelRender.appendChild(item);
-
-            for (let anchor of document.querySelectorAll('a')) {
-                anchor.setAttribute('target', '_blank');
+                renderMessage("assistant", data.reply);
+            } catch (error) {
+                panelLoader.style.opacity = "0%";
+                panelLoader.style.height = "0rem";
+                renderMessage("assistant", "⚠️ " + error.message);
             }
 
             inputReply.disabled = false;
             btnSend.disabled = false;
-            scrollToPosition(panelBox, 1, 1000, "easeInOut");
         }
+
+        restoreHistory();
 
         inputReply.oninput = () => {
             btnSend.disabled = inputReply.value == "";
