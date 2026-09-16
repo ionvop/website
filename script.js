@@ -6,7 +6,7 @@ UpdateParallax();
 
 if (Math.random() < 0.01) {
     setTimeout(() => {
-        document.body.style.backgroundImage = "url('assets/bkub_chu2.png')";
+        document.body.style.backgroundImage = "url('assets/bkub_chu2.webp')";
         document.body.style.backgroundSize = "20%";
         document.body.style.backgroundPosition = "fixed";
     }, 2000);
