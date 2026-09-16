@@ -17,7 +17,7 @@ Debug();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body > .main {
-                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg2.png");
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg2.webp");
                 background-size: 100%;
             
                 & > .content {
@@ -116,7 +116,7 @@ Debug();
                 <div class="profile">
                     <div class="column">
                         <div class="avatar">
-                            <img src="assets/avatar.png">
+                            <img src="assets/avatar.webp">
                         </div>
                         <div class="username -pad -title -center">
                             ionvop
@@ -137,12 +137,12 @@ Debug();
                             my waifu &darr;&darr;&darr;
                         </div>
                         <div class="chu2 -pad -center">
-                            <img src="assets/chu2.png">
+                            <img src="assets/chu2.webp">
                         </div>
                     </div>
                     <div class="panel">
                         <div class="banner -pad">
-                            <img src="assets/banner.png">
+                            <img src="assets/banner.webp">
                         </div>
                         <div class="about">
                             <div class="title -pad -title -center">
