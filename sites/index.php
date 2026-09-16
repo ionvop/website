@@ -17,7 +17,7 @@ Debug();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body > .main {
-                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg4.png");
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg4.webp");
                 background-size: 100%;
 
                 & > .content {
@@ -109,31 +109,31 @@ Debug();
 
                     & > .ionvop {
                         & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.png");
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.webp");
                         }
                     }
 
                     & > .mailist {
                         & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/mailist.png");
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/mailist.webp");
                         }
                     }
 
                     & > .saucedb {
                         & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.png");
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.webp");
                         }
                     }
 
                     & > .nicka {
                         & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/nicka.png");
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/nicka.webp");
                         }
                     }
 
                     & > .wcolor {
                         & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/wcolor.png");
+                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/wcolor.webp");
                         }
                     }
                 }
