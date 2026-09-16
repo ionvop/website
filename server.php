@@ -1,5 +1,7 @@
 <?php
 
+// This file has been deprecated in favor of api/
+
 include("common.php");
 header("Content-type: application/json");
 $_POST = json_decode(file_get_contents('php://input'), true);
