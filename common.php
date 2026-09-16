@@ -2,15 +2,6 @@
 
 include("config.php");
 
-/**
- * Enable debugging.
- */
-function Debug() {
-    ini_set("display_errors", 1);
-    ini_set("display_startup_errors", 1);
-    error_reporting(E_ALL);
-}
-
 function SetHeader($page) {
     $selected = function($a, $b) {
         if ($a == $b && $b == "sites") return "sites--selected";
