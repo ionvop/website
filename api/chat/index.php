@@ -181,16 +181,33 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         if (($response["type"] ?? null) == "mail_to_ionvop" && isset($response["mail"])) {
             $mail = $response["mail"];
 
-            executePreparedQuery($db, <<<SQL
-                INSERT INTO `mails` (`session_id`, `subject`, `author`, `email`, `content`)
-                VALUES (:session_id, :subject, :author, :email, :content)
-            SQL, [
-                ":session_id" => $sessionId,
-                ":subject" => $mail["subject"] ?? "",
-                ":author" => $mail["name"] ?? "N/A",
-                ":email" => $mail["email"] ?? "N/A",
-                ":content" => $mail["body"] ?? ""
-            ]);
+            $subject = trim($mail["subject"] ?? "");
+            $author = trim($mail["name"] ?? "");
+            $email = trim($mail["email"] ?? "");
+            $body = trim($mail["body"] ?? "");
+
+            $validEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+            $valid = $subject !== "" && $body !== "" && mb_strlen($subject) <= 100 && mb_strlen($body) <= 2000;
+
+            // Require a valid email unless the user explicitly wants to remain anonymous.
+            if ($email !== "" && $email !== "N/A" && $validEmail === false) {
+                $valid = false;
+            }
+
+            if ($valid) {
+                executePreparedQuery($db, <<<SQL
+                    INSERT INTO `mails` (`session_id`, `subject`, `author`, `email`, `content`)
+                    VALUES (:session_id, :subject, :author, :email, :content)
+                SQL, [
+                    ":session_id" => $sessionId,
+                    ":subject" => $subject,
+                    ":author" => $author === "" ? "N/A" : $author,
+                    ":email" => $email === "" ? "N/A" : $email,
+                    ":content" => $body
+                ]);
+            } else {
+                $reply = "I couldn't send that mail because it was missing required details or looked like spam. Please provide a valid email, a subject, and a meaningful message, and try again. 💖";
+            }
         }
 
         insertMessage($sessionId, "assistant", $reply);
