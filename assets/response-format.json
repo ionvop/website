@@ -23,7 +23,7 @@
                                 "description": "The content of your reply."
                             }
                         },
-                        "required": ["type", "message"]
+                        "required": ["type", "reply"]
                     },
                     {
                         "type": "object",
@@ -58,9 +58,13 @@
                                     }
                                 },
                                 "required": ["subject", "name", "email", "body"]
+                            },
+                            "reply": {
+                                "type": "string",
+                                "description": "The content of your reply to the user. You may include a remark regarding the mail that was sent to ionvop."
                             }
                         },
-                        "required": ["type", "reason"]
+                        "required": ["type", "mail", "reply"]
                     }
                 ]
             }
