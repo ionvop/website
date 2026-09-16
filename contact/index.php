@@ -33,7 +33,7 @@ Debug();
             }
 
             body > .main {
-                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg3.png");
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg3.webp");
                 background-size: 100%;
                 
                 & > .content {
@@ -281,7 +281,7 @@ Debug();
                     </div>
                     <div class="assistant">
                         <div class="avatar">
-                            <img src="assets/miku.png">
+                            <img src="assets/miku.webp">
                         </div>
                         <div class="chat">
                             <div class="container">
