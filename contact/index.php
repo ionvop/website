@@ -254,7 +254,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax">
-            <?=SetHeader("contact")?>
+            <?=setHeader("contact")?>
             <div class="content -content">
                 <div class="socials">
                     <div class="title -title -center">
@@ -295,7 +295,7 @@ include("common.php");
                                     </div>
                                     <div class="loader" id="panelLoader">
                                         <div class="icon">
-                                            <?=Loader("rings")?>
+                                            <?=loader("rings")?>
                                         </div>
                                         <div></div>
                                     </div>
@@ -309,7 +309,7 @@ include("common.php");
                                     </div>
                                     <div class="button">
                                         <button class="-button" id="btnSend" disabled>
-                                            <?=Icon("send")?>
+                                            <?=icon("send")?>
                                         </button>
                                     </div>
                                 </div>
@@ -318,7 +318,7 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=SetFooter()?>
+            <?=setFooter()?>
         </div>
     </body>
     <script src="script.js"></script>
@@ -329,7 +329,7 @@ include("common.php");
         let inputReply = document.getElementById("inputReply");
         let btnSend = document.getElementById("btnSend");
 
-        AnimatePage([
+        animatePage([
             {target: "body > .main > .content > .socials > .title", type: "-intro__float__left"},
             {target: "body > .main > .content > .socials > .platforms > .discord", type: "-intro__float__up"},
             {target: "body > .main > .content > .socials > .platforms > .github", type: "-intro__float__up"},
@@ -351,7 +351,7 @@ include("common.php");
         btnSend.onclick = async () => {
             if (inputReply.value == "") return;
 
-            let item = ElementFromHTML(/*html*/`
+            let item = elementFromHTML(/*html*/`
                 <div class="item item--user">
                     <div></div>
                     <div class="text -intro -intro__float__right">
@@ -367,7 +367,7 @@ include("common.php");
             btnSend.disabled = true;
             panelLoader.style.height = "auto";
             panelLoader.style.opacity = "100%";
-            ScrollToPosition(panelBox, 1, 1000, "easeInOut");
+            scrollToPosition(panelBox, 1, 1000, "easeInOut");
             let history = [];
             let messages = panelRender.querySelectorAll(".item");
 
@@ -406,7 +406,7 @@ include("common.php");
             await new Promise(resolve => setTimeout(resolve, 1000));
             panelLoader.style.height = "0rem";
 
-            item = ElementFromHTML(/*html*/`
+            item = elementFromHTML(/*html*/`
                 <div class="item item--ai">
                     <div></div>
                     <div class="item--ai__text text -intro -intro__float__left">
@@ -423,7 +423,7 @@ include("common.php");
 
             inputReply.disabled = false;
             btnSend.disabled = false;
-            ScrollToPosition(panelBox, 1, 1000, "easeInOut");
+            scrollToPosition(panelBox, 1, 1000, "easeInOut");
         }
 
         inputReply.oninput = () => {
