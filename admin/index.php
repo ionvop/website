@@ -158,6 +158,17 @@ function esc($value): string {
                         }
                     }
 
+                    & > .topbar {
+                        display: grid;
+                        grid-template-columns: 1fr max-content;
+                        align-items: center;
+                        padding: 1rem;
+
+                        & > .title {
+                            font-weight: bold;
+                        }
+                    }
+
                     & > .dashboard {
                         display: grid;
                         grid-template-columns: 1fr 1fr;
@@ -371,6 +382,16 @@ function esc($value): string {
                         <div class="error" id="loginError"></div>
                     </div>
                 <?php } else { ?>
+                    <div class="topbar">
+                        <div class="title -title">
+                            Admin
+                        </div>
+                        <div class="logout">
+                            <button class="-button" id="btnLogout">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
                     <div class="dashboard">
                         <div class="mails">
                             <div class="title -title">
@@ -495,6 +516,7 @@ function esc($value): string {
             let detailMeta = document.getElementById("detailMeta");
             let detailBody = document.getElementById("detailBody");
             let btnDelete = document.getElementById("btnDelete");
+            let btnLogout = document.getElementById("btnLogout");
 
             const SESSION_KEY = "adminChatSessionKey";
             const ENDPOINT = "api/chat/";
@@ -618,7 +640,24 @@ function esc($value): string {
                 }
             }
 
+            btnLogout.onclick = async () => {
+                let response = await fetch("admin/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        action: "logout"
+                    })
+                });
+
+                if (response.ok) {
+                    location.reload();
+                }
+            }
+
             animatePage([
+                {target: "body > .main > .content > .topbar > .title", type: "-intro__float__left"},
                 {target: "body > .main > .content > .dashboard > .mails > .title", type: "-intro__float__left"},
                 {target: "body > .main > .content > .dashboard > .mails > .list", type: "-intro__float__left"},
                 {target: "body > .main > .content > .dashboard > .chat > .title", type: "-intro__float__left"},
