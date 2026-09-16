@@ -16,7 +16,7 @@ Debug();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body > .main {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg.png");
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg.webp");
                 background-size: 100%;
 
                 & > .content {
