@@ -9,17 +9,17 @@ $_POST = json_decode(file_get_contents('php://input'), true);
 if (isset($_POST["method"])) {
     switch ($_POST["method"]) {
         case "sendMessage":
-            SendMessage();
+            sendMessage();
             break;
         default:
-            DefaultMethod();
+            defaultMethod();
             break;
     }
 } else {
-    DefaultMethod();
+    defaultMethod();
 }
 
-function SendMessage() {
+function sendMessage() {
     global $OPENAI_API_KEY;
 
     $history = $_POST["history"];
@@ -77,7 +77,7 @@ function SendMessage() {
         "tools" => $tools
     ];
 
-    $response = SendCurl("https://api.openai.com/v1/chat/completions", "POST", $headers, json_encode($body));
+    $response = sendCurl("https://api.openai.com/v1/chat/completions", "POST", $headers, json_encode($body));
     $response = json_decode($response, true);
 
     if (isset($response["error"])) {
@@ -141,7 +141,7 @@ function SendMessage() {
                     "messages" => $history
                 ];
             
-                $response = SendCurl("https://api.openai.com/v1/chat/completions", "POST", $headers, json_encode($body));
+                $response = sendCurl("https://api.openai.com/v1/chat/completions", "POST", $headers, json_encode($body));
                 $response = json_decode($response, true);
             
                 if (isset($response["error"])) {
@@ -163,7 +163,7 @@ function SendMessage() {
     ]);
 }
 
-function DefaultMethod() {
+function defaultMethod() {
     echo json_encode([
         "status" => "error",
         "message" => "Method not found"
