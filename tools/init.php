@@ -1,0 +1,43 @@
+<?php
+
+if (php_sapi_name() != "cli") {
+    echo "Please run this script from the command line.";
+    exit(1);
+}
+
+chdir(dirname(__DIR__, 1));
+
+if (file_exists("database.db")) {
+    $success = unlink("database.db");
+
+    if ($success == false) {
+        echo "Failed to delete database.";
+        exit(1);
+    }
+}
+
+$db = new SQLite3("database.db");
+$query = file_get_contents("tools/schema.sql");
+
+if ($query == false) {
+    echo "Failed to read schema.";
+    exit(1);
+}
+
+$success = $db->exec($query);
+
+if ($success == false) {
+    echo "Failed to initialize database.";
+    exit (1);
+}
+
+// Seed the global textboard with a single empty row so reads always succeed.
+$success = $db->exec("INSERT INTO `textboard` (`content`) VALUES ('')");
+
+if ($success == false) {
+    echo "Failed to seed textboard.";
+    exit (1);
+}
+
+echo "Database initialized.";
+exit(0);
