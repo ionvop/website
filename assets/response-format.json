@@ -42,7 +42,7 @@
                                 "properties": {
                                     "subject": {
                                         "type": "string",
-                                        "description": "The subject of the user's mail."
+                                        "description": "The subject of the user's mail. Must be non-empty and under 100 characters."
                                     },
                                     "name": {
                                         "type": "string",
@@ -50,11 +50,11 @@
                                     },
                                     "email": {
                                         "type": "string",
-                                        "description": "The email of the user that ionvop can use to reply to. Use 'N/A' if the user doesn't want to disclose their email or wants to remain anonymous. But do warn the user that ionvop may not be able to reply without it."
+                                        "description": "The email of the user that ionvop can use to reply to. Must be a valid email address (e.g. name@example.com). Use 'N/A' only if the user explicitly wants to remain anonymous, and warn them that ionvop may not be able to reply and anonymous mails may be treated as spam."
                                     },
                                     "body": {
                                         "type": "string",
-                                        "description": "The content of the mail."
+                                        "description": "The content of the mail. Must be non-empty, meaningful, and under 2000 characters."
                                     }
                                 },
                                 "required": ["subject", "name", "email", "body"]
