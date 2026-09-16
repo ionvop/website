@@ -110,7 +110,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax">
-            <?=SetHeader("about")?>
+            <?=setHeader("about")?>
             <div class="content -content">
                 <div class="profile">
                     <div class="column">
@@ -163,12 +163,12 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=SetFooter()?>
+            <?=setFooter()?>
         </div>
     </body>
     <script src="script.js"></script>
     <script>
-        AnimatePage([
+        animatePage([
             {target: "body > .main > .content > .profile", type: "-intro__fade"},
             {target: "body > .main > .content > .profile > .column > .avatar > img", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .column > .username", type: "-intro__float__left"},
