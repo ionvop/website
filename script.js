@@ -60,6 +60,11 @@ async function animatePage(contentTimeline) {
 
     for (let animation of animationTimeline) {
         let element = document.querySelector(animation.target);
+
+        if (element == null) {
+            continue;
+        }
+
         element.style.opacity = "0%";
     }
 
