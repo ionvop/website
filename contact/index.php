@@ -100,11 +100,19 @@ include("common.php");
                             grid-template-columns: max-content 1fr;
                         
                             & > .avatar {
-                                padding: 1rem;
+                                & > .image {
+                                    padding: 1rem;
                             
-                                & > img {
-                                    width: 20rem;
-                                    user-select: none;
+                                    & > img {
+                                        width: 20rem;
+                                        user-select: none;
+                                    }
+                                }
+
+                                & > .new {
+                                    padding: 1rem;
+                                    padding-top: 0rem;
+                                    text-align: center;
                                 }
                             }
 
@@ -288,7 +296,14 @@ include("common.php");
                     </div>
                     <div class="assistant">
                         <div class="avatar">
-                            <img src="assets/miku.webp">
+                            <div class="image">
+                                <img src="assets/miku.webp">
+                            </div>
+                            <div class="new">
+                                <button class="-button" id="btnNew">
+                                    New Chat
+                                </button>
+                            </div>
                         </div>
                         <div class="chat">
                             <div class="container">
@@ -336,6 +351,7 @@ include("common.php");
         let panelLoader = document.getElementById("panelLoader");
         let inputReply = document.getElementById("inputReply");
         let btnSend = document.getElementById("btnSend");
+        let btnNew = document.getElementById("btnNew")
 
         const SESSION_KEY = "chatSessionKey";
         const ENDPOINT = "api/chat/";
@@ -484,6 +500,12 @@ include("common.php");
             if (event.key == "Enter") {
                 btnSend.click();
             }
+        }
+
+        btnNew.onclick = () => {
+            if (confirm("Your current conversation will be cleared. Are you sure?") == false) return;
+            localStorage.removeItem(SESSION_KEY);
+            location.reload();
         }
     </script>
 </html>
