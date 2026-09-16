@@ -135,6 +135,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             SQL, [
                 ":sessionId" => $sessionId
             ])->fetchArray()["key"];
+
+            insertMessage($sessionId, "assistant", "Hello! ✨ I'm Hatsune Pinku and I will be your assistant regarding your messages for ionvop. 💖");
         } else {
             $sessionId = findSessionId($key);
 
