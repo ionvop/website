@@ -21,7 +21,7 @@ function attemptLogin(string $password): bool {
         return false;
     }
 
-    if (password_verify($password, $ADMIN_PASSWORD) == false) {
+    if ($password != $ADMIN_PASSWORD) {
         return false;
     }
 
@@ -504,6 +504,8 @@ function esc($value): string {
                     btnLogin.disabled = false;
                 }
             }
+
+            animatePage([]);
         <?php } else { ?>
             let panelBox = document.getElementById("panelBox");
             let panelRender = document.getElementById("panelRender");
