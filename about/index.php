@@ -2,7 +2,6 @@
 
 chdir("../");
 include("common.php");
-Debug();
 
 ?>
 
