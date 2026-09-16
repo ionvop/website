@@ -77,7 +77,11 @@ function askModel(array $history): array {
         ],
         "body" => [
             "model" => $MODEL,
-            "messages" => $history
+            "messages" => $history,
+            "response_format" => [
+                "type" => "json_schema",
+                "json_schema" => json_decode(file_get_contents("assets/response-format.json"), true)
+            ]
         ],
         "timeout" => 120
     ]);
