@@ -2,7 +2,7 @@
 
 include("config.php");
 
-function SetHeader($page) {
+function setHeader($page) {
     $selected = function($a, $b) {
         if ($a == $b && $b == "sites") return "sites--selected";
         return $a == $b ? "tab--selected" : "";
@@ -44,7 +44,7 @@ function SetHeader($page) {
     HTML;
 }
 
-function SetFooter() {
+function setFooter() {
     return <<<HTML
         <div class="-footer">
             <div class="title">
@@ -68,7 +68,7 @@ function SetFooter() {
     HTML;
 }
 
-function Icon($icon) {
+function icon($icon) {
     switch ($icon) {
         case "send":
             return <<<HTML
@@ -109,7 +109,7 @@ function Icon($icon) {
     }
 }
 
-function Loader($type) {
+function loader($type) {
     switch ($type) {
         case "pulse-rings-multiple":
             return <<<HTML
@@ -167,7 +167,7 @@ function Loader($type) {
  *
  * @return mixed The response from the server as a string, or false if the request fails.
  */
-function SendCurl($url, $method, $headers, $data) {
+function sendCurl($url, $method, $headers, $data) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
