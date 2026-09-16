@@ -93,7 +93,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax" data-height="-0.5">
-            <?=SetHeader("home")?>
+            <?=setHeader("home")?>
             <div class="content -content">
                 <div class="title -center">
                     Hi! I'm ionvop
@@ -108,7 +108,7 @@ include("common.php");
                     </div>
                     <div class="button">
                         <button class="-button">
-                            <?=Icon("send")?>
+                            <?=icon("send")?>
                         </button>
                     </div>
                     <div></div>
@@ -117,7 +117,7 @@ include("common.php");
                     <div class="programming card">
                         <div class="info">
                             <div class="icon -pad -center__flex">
-                                <?=Icon("code")?>
+                                <?=icon("code")?>
                             </div>
                             <div class="subject -pad -center -title">
                                 Software Development
@@ -130,7 +130,7 @@ include("common.php");
                     <div class="hobby card">
                         <div class="info">
                             <div class="icon -pad -center__flex">
-                                <?=Icon("game")?>
+                                <?=icon("game")?>
                             </div>
                             <div class="subject -pad -center -title">
                                 Games and Other Hobbies
@@ -143,7 +143,7 @@ include("common.php");
                     <div class="waifu card">
                         <div class="info">
                             <div class="icon -pad -center__flex">
-                                <?=Icon("heart")?>
+                                <?=icon("heart")?>
                             </div>
                             <div class="subject -pad -center -title">
                                 Simping for CHU&sup2;
@@ -155,12 +155,12 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=SetFooter()?>
+            <?=setFooter()?>
         </div>
     </body>
     <script src="script.js"></script>
     <script>
-        AnimatePage([
+        animatePage([
             { target: "body > .main > .content > .title", type: "-intro__float__left" },
             { target: "body > .main > .content > .subtitle", type: "-intro__float__left" },
             { target: "body > .main > .content > .contact", type: "-intro__float__left" },
