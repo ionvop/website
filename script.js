@@ -1,8 +1,8 @@
 window.addEventListener("scroll", () => {
-    UpdateParallax();
+    updateParallax();
 });
 
-UpdateParallax();
+updateParallax();
 
 if (Math.random() < 0.01) {
     setTimeout(() => {
@@ -12,13 +12,13 @@ if (Math.random() < 0.01) {
     }, 2000);
 }
 
-GlobalEventListener("click", ".-script__link", (element, event) => {
+globalEventListener("click", ".-script__link", (element, event) => {
     if (event.shiftKey) {
         window.open(element.getAttribute("data-href"));
         return;
     }
 
-    PreloadPage(element.getAttribute("data-href"));
+    preloadPage(element.getAttribute("data-href"));
 
     if (element.classList.contains("-intro")) {
         element.style.opacity = "";
@@ -31,14 +31,14 @@ GlobalEventListener("click", ".-script__link", (element, event) => {
         element.style.filter = "brightness(200%)";
     }, 0);
 
-    AnimateOutro(element.getAttribute("data-href"));
+    animateOutro(element.getAttribute("data-href"));
 });
 
-GlobalEventListener("click", ".-script__new", element => {
+globalEventListener("click", ".-script__new", element => {
     window.open(element.getAttribute("data-href"));
 });
 
-async function AnimatePage(contentTimeline) {
+async function animatePage(contentTimeline) {
     let headerTimeline = [
         { target: ".-main", type: "-intro__fade" },
         { target: ".-header > .content > .title", type: "-intro__float__up" },
@@ -64,7 +64,7 @@ async function AnimatePage(contentTimeline) {
     }
 
     for (let animation of animationTimeline) {
-        WaitForElementVisible(animation.target).then(element => {
+        waitForElementVisible(animation.target).then(element => {
             element.classList.add("-intro");
             element.classList.add(animation.type);
         });
@@ -73,7 +73,7 @@ async function AnimatePage(contentTimeline) {
     }
 }
 
-function AnimateOutro(redirect) {
+function animateOutro(redirect) {
     let main = document.querySelector(".-main");
     let elements = document.querySelectorAll(".-intro");
     main.style.opacity = "100%";
@@ -109,7 +109,7 @@ function AnimateOutro(redirect) {
     }, 2000);
 }
 
-function GlobalEventListener(type, selector, callback) {
+function globalEventListener(type, selector, callback) {
     document.addEventListener(type, (event) => {
         if (event.target.closest(selector)) {
             callback(event.target.closest(selector), event);
@@ -117,7 +117,7 @@ function GlobalEventListener(type, selector, callback) {
     });
 }
 
-function PreloadPage(url) {
+function preloadPage(url) {
     fetch(url, {
         method: "GET",
         credentials: "include"
@@ -136,7 +136,7 @@ function PreloadPage(url) {
     });
 }
 
-function ScrollToPosition(element, to, duration = 1000, ease = 'easeInOut') {
+function scrollToPosition(element, to, duration = 1000, ease = 'easeInOut') {
     const easingFunctions = {
         easeIn: t => t * t,
         easeOut: t => t * (2 - t),
@@ -165,7 +165,7 @@ function ScrollToPosition(element, to, duration = 1000, ease = 'easeInOut') {
     requestAnimationFrame(animateScroll);
 }
 
-function UpdateParallax() {
+function updateParallax() {
     let parallaxes = document.querySelectorAll(".-script__parallax");
 
     if (window.matchMedia("(orientation: portrait)").matches) {
@@ -178,7 +178,7 @@ function UpdateParallax() {
     }
 }
 
-function WaitForElementVisible(selector, options = {}) {
+function waitForElementVisible(selector, options = {}) {
     return new Promise(resolve => {
         const element = document.querySelector(selector);
 
@@ -217,7 +217,7 @@ function WaitForElementVisible(selector, options = {}) {
     });
 }
 
-function ElementFromHTML(html) {
+function elementFromHTML(html) {
     let template = document.createElement("template");
     template.innerHTML = html;
     return template.content.firstElementChild;
