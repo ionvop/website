@@ -174,7 +174,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax">
-            <?=SetHeader("sites")?>
+            <?=setHeader("sites")?>
             <div class="content -content">
                 <div class="header">
                     <div class="title -center">
@@ -187,7 +187,7 @@ include("common.php");
                         <div class="apps card">
                             <div class="info">
                                 <div class="icon">
-                                    <?=Icon("widgets")?>
+                                    <?=icon("widgets")?>
                                 </div>
                                 <div class="subject -title -center">
                                     Apps
@@ -201,7 +201,7 @@ include("common.php");
                         <div class="socials card">
                             <div class="info">
                                 <div class="icon">
-                                    <?=Icon("group")?>
+                                    <?=icon("group")?>
                                 </div>
                                 <div class="subject -title -center">
                                     Platforms
@@ -215,7 +215,7 @@ include("common.php");
                         <div class="portfolio card">
                             <div class="info">
                                 <div class="icon">
-                                    <?=Icon("folder_shared")?>
+                                    <?=icon("folder_shared")?>
                                 </div>
                                 <div class="subject -title -center">
                                     Personal
@@ -342,12 +342,12 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=SetFooter()?>
+            <?=setFooter()?>
         </div>
     </body>
     <script src="script.js"></script>
     <script>
-        AnimatePage([
+        animatePage([
             {target: "body > .main > .content > .header > .title", type: "-intro__float__left"},
             {target: "body > .main > .content > .header > .subtitle", type: "-intro__float__left"},
             {target: "body > .main > .content > .header > .section > .apps > .info > .icon", type: "-intro__float__up"},
@@ -394,7 +394,7 @@ include("common.php");
                 section.setAttribute("data-offset", (section.getBoundingClientRect().top + window.scrollY) * -0.7);
             }
 
-            UpdateParallax();
+            updateParallax();
         }
     </script>
 </html>
