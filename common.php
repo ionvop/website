@@ -1,6 +1,7 @@
 <?php
 
-include("config.php");
+require_once "config.php";
+$db = new SQLite3("database.db");
 
 function setHeader($page) {
     $selected = function($a, $b) {
