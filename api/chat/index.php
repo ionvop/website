@@ -167,7 +167,38 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             exit;
         }
 
-        // TODO: Complete
+        $parsed = json_decode($answer["content"], true);
+
+        if (!is_array($parsed) || !isset($parsed["response"])) {
+            http_response_code(502);
+            echo json_encode(["message" => "The model returned an invalid response."]);
+            exit;
+        }
+
+        $response = $parsed["response"];
+        $reply = $response["reply"] ?? "";
+
+        if (($response["type"] ?? null) == "mail_to_ionvop" && isset($response["mail"])) {
+            $mail = $response["mail"];
+
+            executePreparedQuery($db, <<<SQL
+                INSERT INTO `mails` (`session_id`, `subject`, `author`, `email`, `content`)
+                VALUES (:session_id, :subject, :author, :email, :content)
+            SQL, [
+                ":session_id" => $sessionId,
+                ":subject" => $mail["subject"] ?? "",
+                ":author" => $mail["name"] ?? "N/A",
+                ":email" => $mail["email"] ?? "N/A",
+                ":content" => $mail["body"] ?? ""
+            ]);
+        }
+
+        insertMessage($sessionId, "assistant", $reply);
+
+        echo json_encode([
+            "key" => $key,
+            "reply" => $reply
+        ]);
 
         exit;
     default:
