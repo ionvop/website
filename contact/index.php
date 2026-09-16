@@ -181,9 +181,17 @@ include("common.php");
                                         border-radius: 1rem;
                                         overflow: hidden;
 
+                                        & > .input {
+                                            & > input {
+                                                height: 100%;
+                                                box-sizing: border-box;
+                                            }
+                                        }
+
                                         & > .button {
                                             & > button {
                                                 height: 100%;
+                                                box-sizing: border-box;
 
                                                 & > svg {
                                                     width: 1.5rem;
