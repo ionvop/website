@@ -121,13 +121,22 @@ include("common.php");
                             ionvop
                         </div>
                         <div class="titles -pad -subtitle -center">
-                            2024 ACM Programming<br>
-                            Competition Champion<br>
+                            Mapua Malayan Colleges Mindanao<br>
+                            Mindanao-Wide IT Olympiad 2024<br>
+                            ACM Programming Competition<br>
+                            Champion<br>
+                            <br>
+                            UM Tagum College<br>
+                            Festival of Talents 2025<br>
+                            Tetris Battle<br>
+                            Champion<br>
+                            <br>
+                            UM Tagum College<br>
+                            CSIT Academic Festival 2025<br>
+                            Software Engineering Project Presentation<br>
+                            Best Presenter<br>
                             <br>
                             TETR.IO Season 1<br>
-                            U Rank Player<br>
-                            <br>
-                            TETR.IO Season 2<br>
                             U Rank Player<br>
                             <br>
                             the plap guy
@@ -151,13 +160,17 @@ include("common.php");
                                 Last updated: 2024-12-04
                             </div>
                             <div class="content -pad">
-                                I'm currently a 3rd year college student studying Bachelor of Science in Computer Science, and my interests include web development, software development, and game development.<br>
+                                I'm a Bachelor of Science in Computer Science college graduate from UM Tagum College, and my interests include web development, software development, and game development.<br>
                                 <br>
-                                The programming languages I'm familiar with are VBScript for automations, HTML, CSS, JavaScript, and PHP for web development, C# for GUI applications, Java for legacy applications and self-torture, Python for machine-learning, Brainf*ck for fun, Lua for game modding, GLSL for post-processing effects, Turbowarp (Scratch) for game development, and <span class="-script__new -link" data-href="https://github.com/ionvop/ivpy/">ivpy</span> which is a custom programming language that I made for fun.<br>
+                                The programming languages I'm familiar with are HTML, CSS, JavaScript, TypeScript, and PHP for web development, and Python or C# for GUI applications.<br>
                                 <br>
-                                I like to play rhythm games and fast-paced Tetris games. My favorite rhythm games include osu!, mobile games such as Arcaea, Rotaeno, BanG Dream, and arcade rhythm games such as maimai, SDVX, and PIU. My favorite fast-paced Tetris games include TETR.IO and Jstris.<br>
+                                Other languages include VBScript for automations, BrainF for challenges and self-torture, and <span class="-script__new -link" data-href="https://github.com/ionvop/ivpy/">ivpy</span> which is a custom programming language that I made for fun.<br>
                                 <br>
-                                I'm also learning music production and my favorite genre to listen to is dubstep. My favorite artists include ReeK, Eliminate, and Similar Outskirts. I won't list down the JP artists because there's too many of them. The DAW software I used to use was Caustic 3 but I've since switched to Waveform 11.
+                                I like to play rhythm games such as Arcaea, maimai and BanG Dream!, and fast-paced Tetris games such as TETR.IO and Jstris.<br>
+                                <br>
+                                My main games nowadays are Strinova and Neverness to Everness.<br>
+                                <br>
+                                Some <span class="-script__new -link" data-href="https://youtu.be/h0OTWNkLP8s?si=TqzM9YbkHIpr0Njn&t=257">context</span> on &quot;the plap guy&quot; title.
                             </div>
                         </div>
                     </div>
