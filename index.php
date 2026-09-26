@@ -124,7 +124,7 @@ include("common.php");
                             </div>
                         </div>
                         <div class="details -pad -center">
-                            I am currently a college student studying computer science and I am learning to be a web, software, and game developer.
+                            I am a computer science graduate and looking to be a web, software, and game developer.
                         </div>
                     </div>
                     <div class="hobby card">
@@ -137,7 +137,7 @@ include("common.php");
                             </div>
                         </div>
                         <div class="details -pad -center">
-                            I like playing rhythm games and fast-paced Tetris games. I'm also learning music production and my favorite genre is dubstep.
+                            I like playing rhythm games and fast-paced PvP Tetris, but my main games right now are Strinova and Neverness to Everness.
                         </div>
                     </div>
                     <div class="waifu card">
