@@ -39,11 +39,11 @@ function logout() {
     $_SESSION["admin"] = false;
 }
 
-function esc($value): string {
+function esc(string $value): string {
     return htmlspecialchars($value ?? "");
 }
 
-function setHeader($page) {
+function setHeader(string $page): string {
     $selected = function($a, $b) {
         if ($a == $b && $b == "sites") return "sites--selected";
         return $a == $b ? "tab--selected" : "";
@@ -85,7 +85,7 @@ function setHeader($page) {
     HTML;
 }
 
-function setFooter() {
+function setFooter(): string {
     return <<<HTML
         <div class="-footer">
             <div class="title">
@@ -109,7 +109,7 @@ function setFooter() {
     HTML;
 }
 
-function icon($icon) {
+function icon(string $icon): string {
     switch ($icon) {
         case "send":
             return <<<HTML
@@ -148,9 +148,11 @@ function icon($icon) {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M420-160h120q8 0 14-6t6-14q0-8-6-14t-14-6H420q-8 0-14 6t-6 14q0 8 6 14t14 6ZM280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-280h400v-400H280v400Z"/></svg>
             HTML;
     }
+
+    return "";
 }
 
-function loader($type) {
+function loader(string $type): string {
     switch ($type) {
         case "pulse-rings-multiple":
             return <<<HTML
@@ -193,38 +195,8 @@ function loader($type) {
                 </svg>
             HTML;
     }
-}
 
-/**
- * Sends an HTTP request using cURL and returns the response. (This function has been deprecated in favor of fetch())
- *
- * This function initiates a cURL session to send an HTTP request to the specified URL using the given method, headers, 
- * and data. It supports custom request methods and bypasses SSL verification. If the request fails, the function returns false.
- *
- * @param string $url     The URL to which the request is sent.
- * @param string $method  The HTTP method to use for the request (e.g., 'GET', 'POST', 'PUT', 'DELETE').
- * @param array  $headers An array of HTTP headers to include in the request.
- * @param mixed  $data    The data to send with the request. Typically an associative array or a JSON string.
- *
- * @return mixed The response from the server as a string, or false if the request fails.
- */
-function sendCurl($url, $method, $headers, $data) {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    $result = curl_exec($ch);
-
-    if (curl_errno($ch) != 0) {
-        return false;
-    }
-
-    curl_close($ch);
-    return $result;
+    return "";
 }
 
 /**
