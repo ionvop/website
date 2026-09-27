@@ -315,3 +315,216 @@ function fetch(string $url, array $options = []): array {
         'json' => json_decode($bodyString, true)
     ];
 }
+
+/**
+ * Renders the reusable Hatsune Pinku chat assistant markup.
+ *
+ * The markup pairs with the JavaScript returned by {@see chatAssistantJS()}
+ * and expects the `marked` library (for markdown rendering) to be loaded on
+ * the page before the script runs. Requires `script.js` for the
+ * `elementFromHTML` and `scrollToPosition` helpers.
+ *
+ * @param string $intro The assistant's opening message.
+ *
+ * @return string The chat assistant HTML.
+ */
+function renderChatAssistant(string $intro = "Hello! ✨ I'm Hatsune Pinku and I will be your assistant regarding your messages for ionvop. 💖"): string {
+    $loader = loader("rings");
+    $sendIcon = icon("send");
+    $intro = esc($intro);
+
+    return <<<HTML
+        <div class="chat">
+            <div class="container">
+                <div class="box" id="panelBox">
+                    <div class="render" id="panelRender">
+                        <div class="item--ai item">
+                            <div class="item--ai__text text -intro -intro__float__left">
+                                {$intro}
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="loader" id="panelLoader">
+                        <div class="icon">
+                            {$loader}
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="reply">
+                <div class="box">
+                    <div class="input">
+                        <input class="-input" id="inputReply" placeholder="Write a reply">
+                    </div>
+                    <div class="button">
+                        <button class="-button" id="btnSend" disabled>
+                            {$sendIcon}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    HTML;
+}
+
+/**
+ * Returns the JavaScript that powers the chat assistant rendered by
+ * {@see renderChatAssistant()}.
+ *
+ * The returned code expects the chat markup to be present in the DOM and the
+ * `marked` library to be loaded. History is persisted per `$sessionKey` via
+ * localStorage.
+ *
+ * @param string   $sessionKey The localStorage key used to persist the session.
+ * @param string   $endpoint   The chat API endpoint.
+ * @param int|null $mailId     When set (admin dashboard only), the id of the
+ *                             mail the assistant should be aware of.
+ *
+ * @return string The chat assistant JavaScript.
+ */
+function chatAssistantJS(string $sessionKey, string $endpoint = "api/chat/", ?int $mailId = null): string {
+    $config = json_encode([
+        "key" => $sessionKey,
+        "endpoint" => $endpoint,
+        "mailId" => $mailId
+    ]);
+
+    $js = <<<'JS'
+        const CHAT = __CONFIG__;
+
+        const panelBox = document.getElementById("panelBox");
+        const panelRender = document.getElementById("panelRender");
+        const panelLoader = document.getElementById("panelLoader");
+        const inputReply = document.getElementById("inputReply");
+        const btnSend = document.getElementById("btnSend");
+
+        function getSessionKey() {
+            return localStorage.getItem(CHAT.key);
+        }
+
+        function setSessionKey(key) {
+            localStorage.setItem(CHAT.key, key);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement("div");
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function renderMessage(role, content, animate = true) {
+            const isUser = role == "user";
+            const body = isUser ? escapeHtml(content) : marked.parse(content);
+            const intro = animate ? " -intro -intro__float__" + (isUser ? "right" : "left") : "";
+
+            const item = elementFromHTML(/*html*/`
+                <div class="item ${isUser ? "item--user" : "item--ai"}">
+                    <div></div>
+                    <div class="text ${isUser ? "" : "item--ai__text"}${intro}">
+                        ${body}
+                    </div>
+                </div>
+            `);
+
+            panelRender.appendChild(item);
+
+            for (const anchor of item.querySelectorAll("a")) {
+                anchor.setAttribute("target", "_blank");
+            }
+
+            scrollToPosition(panelBox, 1, 1000, "easeInOut");
+        }
+
+        async function restoreHistory() {
+            const key = getSessionKey();
+
+            if (key == null) {
+                return;
+            }
+
+            const response = await fetch(CHAT.endpoint + "?key=" + encodeURIComponent(key));
+
+            if (!response.ok) {
+                localStorage.removeItem(CHAT.key);
+                return;
+            }
+
+            const data = await response.json();
+
+            if (data.messages == null || data.messages.length == 0) {
+                return;
+            }
+
+            panelRender.innerHTML = "";
+
+            for (const message of data.messages) {
+                renderMessage(message.role, message.content, false);
+            }
+        }
+
+        btnSend.onclick = async () => {
+            const content = inputReply.value.trim();
+
+            if (content == "") return;
+
+            renderMessage("user", content);
+
+            inputReply.value = "";
+            inputReply.disabled = true;
+            btnSend.disabled = true;
+            panelLoader.style.height = "auto";
+            panelLoader.style.opacity = "100%";
+
+            try {
+                const response = await fetch(CHAT.endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        key: getSessionKey() ?? undefined,
+                        content: content,
+                        mail_id: CHAT.mailId ?? undefined
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || ("Request failed (" + response.status + ")"));
+                }
+
+                setSessionKey(data.key);
+
+                panelLoader.style.opacity = "0%";
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                panelLoader.style.height = "0rem";
+
+                renderMessage("assistant", data.reply);
+            } catch (error) {
+                panelLoader.style.opacity = "0%";
+                panelLoader.style.height = "0rem";
+                renderMessage("assistant", "⚠️ " + error.message);
+            }
+
+            inputReply.disabled = false;
+            btnSend.disabled = false;
+        };
+
+        inputReply.oninput = () => {
+            btnSend.disabled = inputReply.value == "";
+        };
+
+        inputReply.onkeydown = (event) => {
+            if (event.key == "Enter") {
+                btnSend.click();
+            }
+        };
+
+        restoreHistory();
+    JS;
+
+    return str_replace("__CONFIG__", $config, $js);
+}
