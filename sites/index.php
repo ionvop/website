@@ -1,7 +1,7 @@
 <?php
 
 chdir("../");
-include("common.php");
+require_once "common.php";
 
 ?>
 
@@ -174,7 +174,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax">
-            <?=setHeader("sites")?>
+            <?= setHeader("sites") ?>
             <div class="content -content">
                 <div class="header">
                     <div class="title -center">
@@ -187,7 +187,7 @@ include("common.php");
                         <div class="apps card">
                             <div class="info">
                                 <div class="icon">
-                                    <?=icon("widgets")?>
+                                    <?= icon("widgets") ?>
                                 </div>
                                 <div class="subject -title -center">
                                     Apps
@@ -215,7 +215,7 @@ include("common.php");
                         <div class="portfolio card">
                             <div class="info">
                                 <div class="icon">
-                                    <?=icon("folder_shared")?>
+                                    <?= icon("folder_shared") ?>
                                 </div>
                                 <div class="subject -title -center">
                                     Personal
@@ -342,7 +342,7 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=setFooter()?>
+            <?= setFooter() ?>
         </div>
     </body>
     <script src="script.js"></script>
