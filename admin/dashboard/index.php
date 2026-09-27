@@ -3,54 +3,15 @@
 chdir("../../");
 require_once "common.php";
 
-// ---------------------------------------------------------------------------
-// Auth gate
-// ---------------------------------------------------------------------------
-
 if (isAuthed() == false) {
     header("Location: ../");
     exit;
 }
 
-// Handle logout / delete POSTs before rendering.
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $data = json_decode(file_get_contents('php://input'), true);
-    $action = $data["action"] ?? null;
-
-    if ($action == "logout") {
-        logout();
-        echo json_encode(["ok" => true]);
-        exit;
-    }
-
-    if ($action == "delete" && isAuthed()) {
-        $id = intval($data["id"] ?? 0);
-
-        if ($id > 0) {
-            executePreparedQuery($db, <<<SQL
-                DELETE FROM `mails` WHERE `id` = :id
-            SQL, [
-                ":id" => $id
-            ]);
-        }
-
-        echo json_encode(["ok" => true]);
-        exit;
-    }
-
-    http_response_code(400);
-    echo json_encode(["message" => "Unknown action."]);
-    exit;
-}
-
-// ---------------------------------------------------------------------------
-// Mail data
-// ---------------------------------------------------------------------------
-
 $mails = [];
 
 $result = executePreparedQuery($db, <<<SQL
-    SELECT `id`, `subject`, `author`, `email`, `content`, `created_at`
+    SELECT *
     FROM `mails`
     ORDER BY `id` DESC
 SQL);
@@ -366,6 +327,15 @@ while ($row = $result->fetchArray()) {
     </body>
     <script src="script.js"></script>
     <script>
+        animatePage([
+            {target: "body > .main > .content > .topbar > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .mails > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .mails > .list", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .chat > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .chat > .container > .box", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .chat > .reply", type: "-intro__float__left"}
+        ]);
+
         let panelBox = document.getElementById("panelBox");
         let panelRender = document.getElementById("panelRender");
         let panelLoader = document.getElementById("panelLoader");
@@ -516,15 +486,6 @@ while ($row = $result->fetchArray()) {
                 location.href = "admin/";
             }
         }
-
-        animatePage([
-            {target: "body > .main > .content > .topbar > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .mails > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .mails > .list", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .chat > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .chat > .container > .box", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .chat > .reply", type: "-intro__float__left"}
-        ]);
 
         btnSend.onclick = async () => {
             let content = inputReply.value.trim();
