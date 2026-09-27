@@ -32,14 +32,24 @@ while ($row = $result->fetchArray()) {
         <link rel="icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
+            html, body {
+                height: 100%;
+            }
+
             body > .main {
+                height: 100%;
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg3.webp");
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
 
                 & > .content {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+
                     & > .topbar {
+                        flex: 0 0 auto;
                         display: grid;
                         grid-template-columns: 1fr max-content;
                         align-items: center;
@@ -51,11 +61,24 @@ while ($row = $result->fetchArray()) {
                     }
 
                     & > .dashboard {
-                        max-width: 60rem;
-                        margin: 0 auto;
+                        flex: 1 1 auto;
+                        min-height: 0;
+                        width: 100%;
+                        padding: 0 1rem 1rem;
 
                         & > .mails {
+                            height: 100%;
+                            display: grid;
+                            grid-template-columns: 1fr;
+                            grid-template-rows: max-content 1fr;
+                            gap: 1rem;
+
+                            &.selected {
+                                grid-template-columns: 1fr 1fr;
+                            }
+
                             & > .title {
+                                grid-column: 1 / -1;
                                 padding: 1rem;
                                 font-weight: bold;
                             }
@@ -63,7 +86,8 @@ while ($row = $result->fetchArray()) {
                             & > .list {
                                 background-color: #000a;
                                 border-radius: 1rem;
-                                height: 30rem;
+                                height: 100%;
+                                min-height: 0;
                                 overflow-y: auto;
 
                                 & > .item {
@@ -102,7 +126,9 @@ while ($row = $result->fetchArray()) {
                                 background-color: #000a;
                                 border-radius: 1rem;
                                 padding: 1rem;
-                                margin-top: 1rem;
+                                height: 100%;
+                                min-height: 0;
+                                overflow-y: auto;
 
                                 & > .subject {
                                     font-size: 1.2rem;
@@ -122,6 +148,19 @@ while ($row = $result->fetchArray()) {
                                 & > .actions {
                                     text-align: right;
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @media (orientation: portrait) {
+                body > .main {
+                    & > .content {
+                        & > .dashboard {
+                            & > .mails {
+                                grid-template-columns: 1fr;
+                                grid-template-rows: max-content 1fr 1fr;
                             }
                         }
                     }
@@ -195,6 +234,7 @@ while ($row = $result->fetchArray()) {
     <script>
         const mailList = document.getElementById("mailList");
         const mailDetail = document.getElementById("mailDetail");
+        const mailsPanel = document.querySelector(".mails");
         const detailSubject = document.getElementById("detailSubject");
         const detailMeta = document.getElementById("detailMeta");
         const detailBody = document.getElementById("detailBody");
@@ -224,6 +264,7 @@ while ($row = $result->fetchArray()) {
             detailBody.textContent = mail.content;
             btnOpen.dataset.id = mail.id;
             mailDetail.hidden = false;
+            mailsPanel.classList.add("selected");
         }
 
         btnOpen.onclick = () => {
