@@ -1,6 +1,6 @@
 <?php
 
-include("common.php");
+require_once "common.php";
 
 ?>
 
@@ -93,7 +93,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax" data-height="-0.5">
-            <?=setHeader("home")?>
+            <?= setHeader("home") ?>
             <div class="content -content">
                 <div class="title -center">
                     Hi! I'm ionvop
@@ -108,7 +108,7 @@ include("common.php");
                     </div>
                     <div class="button">
                         <button class="-button">
-                            <?=icon("send")?>
+                            <?= icon("send") ?>
                         </button>
                     </div>
                     <div></div>
@@ -117,7 +117,7 @@ include("common.php");
                     <div class="programming card">
                         <div class="info">
                             <div class="icon -pad -center__flex">
-                                <?=icon("code")?>
+                                <?= icon("code") ?>
                             </div>
                             <div class="subject -pad -center -title">
                                 Software Development
@@ -130,7 +130,7 @@ include("common.php");
                     <div class="hobby card">
                         <div class="info">
                             <div class="icon -pad -center__flex">
-                                <?=icon("game")?>
+                                <?= icon("game") ?>
                             </div>
                             <div class="subject -pad -center -title">
                                 Games and Other Hobbies
@@ -143,7 +143,7 @@ include("common.php");
                     <div class="waifu card">
                         <div class="info">
                             <div class="icon -pad -center__flex">
-                                <?=icon("heart")?>
+                                <?= icon("heart") ?>
                             </div>
                             <div class="subject -pad -center -title">
                                 Simping for CHU&sup2;
@@ -155,7 +155,7 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=setFooter()?>
+            <?= setFooter() ?>
         </div>
     </body>
     <script src="script.js"></script>
@@ -174,88 +174,5 @@ include("common.php");
             { target: "body > .main > .content > .about > .waifu > .info > .subject", type: "-intro__float__up" },
             { target: "body > .main > .content > .about > .waifu > .details", type: "-intro__float__left" }
         ]);
-
-        let easterEggPhase = 0;
-        let about = document.querySelector(".-header > .content > .about");
-        let contact = document.querySelector(".-header > .content > .contact");
-        let sites = document.querySelector(".-header > .content > .sites");
-        let send = document.querySelector("body > .main > .content > .contact > .button");
-
-        about.addEventListener("mouseenter", () => {
-            switch (easterEggPhase) {
-                case 0:
-                    easterEggPhase = 1;
-                    break;
-                case 4:
-                    easterEggPhase = 5;
-                    break;
-                case 8:
-                    easterEggPhase = 9;
-                    break;
-                default:
-                    easterEggPhase = 0;
-                    break;
-            }
-
-            console.log(easterEggPhase);
-        });
-
-        contact.addEventListener("mouseenter", () => {
-            switch (easterEggPhase) {
-                case 1:
-                    easterEggPhase = 2;
-                    break;
-                case 5:
-                    easterEggPhase = 6;
-                    break;
-                case 9:
-                    easterEggPhase = 10;
-                    break;
-                default:
-                    easterEggPhase = 0;
-                    break;
-            }
-
-            console.log(easterEggPhase);
-        });
-
-        sites.addEventListener("mouseenter", () => {
-            switch (easterEggPhase) {
-                case 2:
-                    easterEggPhase = 3;
-                    break;
-                case 6:
-                    easterEggPhase = 7;
-                    break;
-                case 10:
-                    easterEggPhase = 11;
-                    break;
-                default:
-                    easterEggPhase = 0;
-                    break;
-            }
-
-            console.log(easterEggPhase);
-        });
-
-        send.addEventListener("mouseenter", () => {
-            switch (easterEggPhase) {
-                case 3:
-                    easterEggPhase = 4;
-                    break;
-                case 7:
-                    easterEggPhase = 8;
-                    break;
-                case 11:
-                    alert("Easter egg unlocked!");
-                    easterEggPhase = 0;
-                    break;
-                default:
-                    easterEggPhase = 0;
-                    break;
-            }
-
-            console.log(easterEggPhase);
-        });
     </script>
 </html>
