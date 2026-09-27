@@ -334,7 +334,7 @@ function renderChatAssistant(string $intro = "Hello! ✨ I'm Hatsune Pinku and I
     $intro = esc($intro);
 
     return <<<HTML
-        <div class="chat">
+        <div class="chat -chat">
             <div class="container">
                 <div class="box" id="panelBox">
                     <div class="render" id="panelRender">
