@@ -258,22 +258,33 @@ while ($row = $result->fetchArray()) {
                             Mails
                         </div>
                         <div class="list" id="mailList">
-                            <?php if (empty($mails)) { ?>
-                                <div class="empty">
-                                    No mails yet.
-                                </div>
-                            <?php } else { ?>
-                                <?php foreach ($mails as $mail) { ?>
-                                    <div class="item" data-id="<?=esc($mail["id"])?>" onclick="selectMail(this)">
-                                        <div class="subject">
-                                            <?=esc($mail["subject"])?>
+                            <?php
+                                if (empty($mails)) {
+                                    echo <<<HTML
+                                        <div class="empty">
+                                            No mails yet.
                                         </div>
-                                        <div class="meta">
-                                            <?=esc($mail["author"])?> &middot; <?=esc($mail["created_at"])?>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            <?php } ?>
+                                    HTML;
+                                } else {
+                                    foreach ($mails as $mail) {
+                                        $id = esc($mail["id"]);
+                                        $subject = esc($mail["subject"]);
+                                        $author = esc($mail["author"]);
+                                        $createdAt = esc($mail["created_at"]);
+
+                                        echo <<<HTML
+                                            <div class="item" data-id="{$id}" onclick="selectMail(this)">
+                                                <div class="subject">
+                                                    {$subject}
+                                                </div>
+                                                <div class="meta">
+                                                    {$author} &middot; {$createdAt}
+                                                </div>
+                                            </div>
+                                        HTML;
+                                    }
+                                }
+                            ?>
                         </div>
                         <div class="detail" id="mailDetail" hidden>
                             <div class="subject" id="detailSubject"></div>
@@ -302,7 +313,7 @@ while ($row = $result->fetchArray()) {
                                 </div>
                                 <div class="loader" id="panelLoader">
                                     <div class="icon">
-                                        <?=loader("rings")?>
+                                        <?= loader("rings") ?>
                                     </div>
                                     <div></div>
                                 </div>
@@ -315,7 +326,7 @@ while ($row = $result->fetchArray()) {
                                 </div>
                                 <div class="button">
                                     <button class="-button" id="btnSend" disabled>
-                                        <?=icon("send")?>
+                                        <?= icon("send") ?>
                                     </button>
                                 </div>
                             </div>
@@ -327,52 +338,44 @@ while ($row = $result->fetchArray()) {
     </body>
     <script src="script.js"></script>
     <script>
-        animatePage([
-            {target: "body > .main > .content > .topbar > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .mails > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .mails > .list", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .chat > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .chat > .container > .box", type: "-intro__float__left"},
-            {target: "body > .main > .content > .dashboard > .chat > .reply", type: "-intro__float__left"}
-        ]);
+        const panelBox = document.getElementById("panelBox");
+        const panelRender = document.getElementById("panelRender");
+        const panelLoader = document.getElementById("panelLoader");
+        const inputReply = document.getElementById("inputReply");
+        const btnSend = document.getElementById("btnSend");
+        const mailList = document.getElementById("mailList");
+        const mailDetail = document.getElementById("mailDetail");
+        const detailSubject = document.getElementById("detailSubject");
+        const detailMeta = document.getElementById("detailMeta");
+        const detailBody = document.getElementById("detailBody");
+        const btnDelete = document.getElementById("btnDelete");
+        const btnLogout = document.getElementById("btnLogout");
+        const mails = <?=json_encode($mails)?>;
 
-        let panelBox = document.getElementById("panelBox");
-        let panelRender = document.getElementById("panelRender");
-        let panelLoader = document.getElementById("panelLoader");
-        let inputReply = document.getElementById("inputReply");
-        let btnSend = document.getElementById("btnSend");
-        let mailList = document.getElementById("mailList");
-        let mailDetail = document.getElementById("mailDetail");
-        let detailSubject = document.getElementById("detailSubject");
-        let detailMeta = document.getElementById("detailMeta");
-        let detailBody = document.getElementById("detailBody");
-        let btnDelete = document.getElementById("btnDelete");
-        let btnLogout = document.getElementById("btnLogout");
-
-        const SESSION_KEY = "adminChatSessionKey";
-        const ENDPOINT = "api/chat/";
-
-        let mails = <?=json_encode($mails)?>;
+        (() => {
+            restoreHistory();
+        })();
 
         function getSessionKey() {
-            return localStorage.getItem(SESSION_KEY);
+            return localStorage.getItem("adminChatSessionKey");
         }
 
         function setSessionKey(key) {
-            localStorage.setItem(SESSION_KEY, key);
+            localStorage.setItem("adminChatSessionKey", key);
         }
 
         function escapeHtml(text) {
-            let div = document.createElement("div");
+            const div = document.createElement("div");
             div.textContent = text;
             return div.innerHTML;
         }
 
         function renderMessage(role, content, animate = true) {
-            let isUser = role == "user";
-            let body = isUser ? escapeHtml(content) : marked.parse(content);
-            let intro = animate ? " -intro -intro__float__" + (isUser ? "right" : "left") : "";
-            let item = elementFromHTML(/*html*/`
+            const isUser = role == "user";
+            const body = isUser ? escapeHtml(content) : marked.parse(content);
+            const intro = animate ? " -intro -intro__float__" + (isUser ? "right" : "left") : "";
+
+            const item = elementFromHTML(/*html*/`
                 <div class="item ${isUser ? "item--user" : "item--ai"}">
                     <div></div>
                     <div class="text ${isUser ? "" : "item--ai__text"}${intro}">
@@ -383,7 +386,7 @@ while ($row = $result->fetchArray()) {
 
             panelRender.appendChild(item);
 
-            for (let anchor of item.querySelectorAll("a")) {
+            for (const anchor of item.querySelectorAll("a")) {
                 anchor.setAttribute("target", "_blank");
             }
 
@@ -391,20 +394,20 @@ while ($row = $result->fetchArray()) {
         }
 
         async function restoreHistory() {
-            let key = getSessionKey();
+            const key = getSessionKey();
 
             if (key == null) {
                 return;
             }
 
-            let response = await fetch(ENDPOINT + "?key=" + encodeURIComponent(key));
+            const response = await fetch("api/chat/" + "?key=" + encodeURIComponent(key));
 
             if (!response.ok) {
-                localStorage.removeItem(SESSION_KEY);
+                localStorage.removeItem("adminChatSessionKey");
                 return;
             }
 
-            let data = await response.json();
+            const data = await response.json();
 
             if (data.messages == null || data.messages.length == 0) {
                 return;
@@ -412,23 +415,31 @@ while ($row = $result->fetchArray()) {
 
             panelRender.innerHTML = "";
 
-            for (let message of data.messages) {
+            for (const message of data.messages) {
                 renderMessage(message.role, message.content, false);
             }
         }
 
+        animatePage([
+            {target: "body > .main > .content > .topbar > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .mails > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .mails > .list", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .chat > .title", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .chat > .container > .box", type: "-intro__float__left"},
+            {target: "body > .main > .content > .dashboard > .chat > .reply", type: "-intro__float__left"}
+        ]);
+
         function selectMail(element) {
-            let id = parseInt(element.getAttribute("data-id"));
-            let mail = mails.find(m => m.id == id);
+            const id = parseInt(element.getAttribute("data-id"));
+            const mail = mails.find(m => m.id == id);
 
             if (mail == null) return;
 
-            for (let item of mailList.querySelectorAll(".item")) {
+            for (const item of mailList.querySelectorAll(".item")) {
                 item.classList.remove("selected");
             }
 
             element.classList.add("selected");
-
             detailSubject.textContent = mail.subject;
             detailMeta.textContent = (mail.author || "N/A") + " · " + (mail.email || "N/A") + " · " + mail.created_at;
             detailBody.textContent = mail.content;
@@ -437,19 +448,14 @@ while ($row = $result->fetchArray()) {
         }
 
         btnDelete.onclick = async () => {
-            let id = btnDelete.dataset.id;
-
+            const id = btnDelete.dataset.id;
             if (id == null || confirm("Delete this mail?") == false) return;
 
-            let response = await fetch("admin/dashboard/", {
-                method: "POST",
+            const response = await fetch(`api/admin/mail/?id=${id}`, {
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    action: "delete",
-                    id: id
-                })
+                }
             });
 
             if (!response.ok) {
@@ -460,7 +466,7 @@ while ($row = $result->fetchArray()) {
             mails = mails.filter(m => m.id != id);
             mailDetail.hidden = true;
 
-            for (let item of mailList.querySelectorAll(".item")) {
+            for (const item of mailList.querySelectorAll(".item")) {
                 if (item.getAttribute("data-id") == id) {
                     item.remove();
                 }
@@ -472,14 +478,11 @@ while ($row = $result->fetchArray()) {
         }
 
         btnLogout.onclick = async () => {
-            let response = await fetch("admin/dashboard/", {
+            const response = await fetch("api/admin/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    action: "logout"
-                })
+                }
             });
 
             if (response.ok) {
@@ -534,8 +537,6 @@ while ($row = $result->fetchArray()) {
             inputReply.disabled = false;
             btnSend.disabled = false;
         }
-
-        restoreHistory();
 
         inputReply.oninput = () => {
             btnSend.disabled = inputReply.value == "";
