@@ -212,7 +212,7 @@ if ($mail == false) {
             <div class="content -content">
                 <div class="topbar">
                     <div class="back">
-                        <button class="-button" onclick="location.href = '../'">
+                        <button class="-button" onclick="location.href = 'admin/dashboard/'">
                             Back
                         </button>
                     </div>
