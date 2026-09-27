@@ -1,14 +1,8 @@
-window.addEventListener("scroll", () => {
-    updateParallax();
-});
-
-updateParallax();
-
 if (Math.random() < 0.01) {
     setTimeout(() => {
         document.body.style.backgroundImage = "url('assets/bkub_chu2.webp')";
         document.body.style.backgroundSize = "20%";
-        document.body.style.backgroundPosition = "fixed";
+        document.body.style.backgroundAttachment = "fixed";
     }, 2000);
 }
 
@@ -168,19 +162,6 @@ function scrollToPosition(element, to, duration = 1000, ease = 'easeInOut') {
     }
 
     requestAnimationFrame(animateScroll);
-}
-
-function updateParallax() {
-    let parallaxes = document.querySelectorAll(".-script__parallax");
-
-    if (window.matchMedia("(orientation: portrait)").matches) {
-        return;
-    }
-
-    for (let parallax of parallaxes) {
-        let offset = (parallax.getAttribute("data-offset") != null) ? parallax.getAttribute("data-offset") : 0;
-        parallax.style.backgroundPositionY = document.body.scrollTop * 0.7 + parseFloat(offset) + "px";
-    }
 }
 
 function waitForElementVisible(selector, options = {}) {
