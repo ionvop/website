@@ -1,7 +1,7 @@
 <?php
 
 chdir("../");
-include("common.php");
+require_once "common.php";
 
 ?>
 
@@ -110,7 +110,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax">
-            <?=setHeader("about")?>
+            <?= setHeader("about") ?>
             <div class="content -content">
                 <div class="profile">
                     <div class="column">
@@ -176,7 +176,7 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=setFooter()?>
+            <?= setFooter() ?>
         </div>
     </body>
     <script src="script.js"></script>
