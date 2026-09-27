@@ -119,7 +119,9 @@ function esc($value): string {
         <style>
             body > .main {
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg3.webp");
-                background-size: 100%;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
 
                 & > .content {
                     & > .login {
@@ -348,10 +350,6 @@ function esc($value): string {
 
             @media (orientation: portrait) {
                 body > .main {
-                    background-size: cover;
-                    background-position: 30% 50%;
-                    background-attachment: fixed;
-
                     & > .content {
                         & > .dashboard {
                             grid-template-columns: 1fr;
