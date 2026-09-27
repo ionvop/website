@@ -479,7 +479,7 @@ while ($row = $result->fetchArray()) {
 
         btnLogout.onclick = async () => {
             const response = await fetch("api/admin/", {
-                method: "POST",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
                 }
