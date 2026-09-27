@@ -155,16 +155,24 @@ require_once "common.php";
                                 About Me
                             </div>
                             <div class="subtitle -pad -subtitle -center">
-                                Last updated: 2024-12-04
+                                Last updated: 2026-09-26
                             </div>
                             <div class="content -pad">
-                                I'm a Bachelor of Science in Computer Science college graduate from UM Tagum College, and my interests include web development, software development, and game development.<br>
+                                I'm a Bachelor of Science in Computer Science graduate from UM Tagum College and my interests include web, software, and game development.<br>
                                 <br>
                                 The programming languages I'm familiar with are HTML, CSS, JavaScript, TypeScript, and PHP for web development, and Python or C# for GUI applications.<br>
                                 <br>
                                 Other languages include VBScript for automations, BrainF for challenges and self-torture, and <span class="-script__new -link" data-href="https://github.com/ionvop/ivpy/">ivpy</span> which is a custom programming language that I made for fun.<br>
                                 <br>
-                                I like to play rhythm games such as Arcaea, maimai and BanG Dream!, and fast-paced Tetris games such as TETR.IO and Jstris.<br>
+                                The framework that I mainly work with is Laravel for building websites and applications, but other frameworks I work with include FastAPI mainly for deploying Huggingface API demos, Flutter for mobile app development, and SvelteKit to supposedly work with AstroDX but college got in the way of that area.<br>
+                                <br>
+                                The frontend development tools that I mainly use are either Laravel Blade or React depending on the project, and additional tools include Tailwind CSS for styling, Daisy UI for components, and Vite for building assets.<br>
+                                <br>
+                                I mainly work with relational databases with my personal favorite being SQLite3 for the serverless simplicity, but I also have experience with other databases such as MySQL for building websites with XAMPP, and PostgreSQL for building apps that prioritizes performance.<br>
+                                <br>
+                                The game engine that I'm most familiar with is Turbowarp or Scratch since those are actually what got me into programming in the first place, but nowadays I use Godot for general game development, and Ren'Py for developing visual novels.
+                                <br>
+                                I also like to play rhythm games such as Arcaea, maimai and BanG Dream!, and fast-paced Tetris games such as TETR.IO and Jstris.<br>
                                 <br>
                                 My main games nowadays are Strinova and Neverness to Everness.<br>
                                 <br>
@@ -184,12 +192,12 @@ require_once "common.php";
             {target: "body > .main > .content > .profile > .column > .avatar > img", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .column > .username", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .column > .titles", type: "-intro__float__left"},
-            {target: "body > .main > .content > .profile > .column > .label", type: "-intro__float__left"}, // ignore from wait until visible
-            {target: "body > .main > .content > .profile > .column > .chu2", type: "-intro__float__left"}, // ignore from wait until visible
             {target: "body > .main > .content > .profile > .panel > .banner", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .panel > .about > .title", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .panel > .about > .subtitle", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .panel > .about > .content", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .column > .label", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .column > .chu2", type: "-intro__float__left"},
         ]);
     </script>
 </html>
