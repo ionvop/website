@@ -155,9 +155,36 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         insertMessage($sessionId, "user", $content);
         $history = loadHistory($sessionId);
 
+        // Only honoured for authenticated admins so mails are never leaked.
+        $mailId = $data["mail_id"] ?? null;
+        $adminContext = "";
+
+        if ($mailId !== null && isAuthed()) {
+            $mail = executePreparedQuery($db, <<<SQL
+                SELECT * FROM `mails` WHERE `id` = :id
+            SQL, [
+                ":id" => $mailId
+            ])->fetchArray();
+
+            if ($mail != false) {
+                $adminContext = "\n\n---\n\n# Admin dashboard mode\n\n"
+                    . "You are now assisting ionvop (the website owner) in the private admin dashboard, not a public visitor. "
+                    . "The admin is looking at the mail below and wants your help with it.\n\n"
+                    . "**Mail #{$mail["id"]}**\n"
+                    . "- Subject: {$mail["subject"]}\n"
+                    . "- From: {$mail["author"]} <{$mail["email"]}>\n"
+                    . "- Received: {$mail["created_at"]}\n"
+                    . "- Body:\n\n{$mail["content"]}\n\n"
+                    . "In admin mode you MUST always use the `reply` response format. "
+                    . "Do NOT use `mail_to_ionvop`; never send a mail on the admin's behalf. "
+                    . "Help summarize the mail, answer questions about it, or draft replies when asked. "
+                    . "Never invent details that are not present in the mail.";
+            }
+        }
+
         array_unshift($history, [
             "role" => "system",
-            "content" => file_get_contents("assets/prompt.md")
+            "content" => file_get_contents("assets/prompt.md") . $adminContext . "\n\nKeep your responses casual, short, and concise."
         ]);
 
         $answer = askModel($history);
@@ -179,7 +206,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         $response = $parsed["response"];
         $reply = $response["reply"] ?? "";
 
-        if (($response["type"] ?? null) == "mail_to_ionvop" && isset($response["mail"])) {
+        if ($adminContext == "" && ($response["type"] ?? null) == "mail_to_ionvop" && isset($response["mail"])) {
             $mail = $response["mail"];
 
             $subject = trim($mail["subject"] ?? "");
