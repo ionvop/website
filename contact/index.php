@@ -1,7 +1,7 @@
 <?php
 
 chdir("../");
-include("common.php");
+require_once "common.php";
 
 ?>
 
@@ -270,7 +270,7 @@ include("common.php");
     </head>
     <body>
         <div class="main -main -script__parallax">
-            <?=setHeader("contact")?>
+            <?= setHeader("contact") ?>
             <div class="content -content">
                 <div class="socials">
                     <div class="title -title -center">
@@ -318,7 +318,7 @@ include("common.php");
                                     </div>
                                     <div class="loader" id="panelLoader">
                                         <div class="icon">
-                                            <?=loader("rings")?>
+                                            <?= loader("rings") ?>
                                         </div>
                                         <div></div>
                                     </div>
@@ -332,7 +332,7 @@ include("common.php");
                                     </div>
                                     <div class="button">
                                         <button class="-button" id="btnSend" disabled>
-                                            <?=icon("send")?>
+                                            <?= icon("send") ?>
                                         </button>
                                     </div>
                                 </div>
@@ -341,40 +341,50 @@ include("common.php");
                     </div>
                 </div>
             </div>
-            <?=setFooter()?>
+            <?= setFooter() ?>
         </div>
     </body>
     <script src="script.js"></script>
     <script>
-        let panelBox = document.getElementById("panelBox");
-        let panelRender = document.getElementById("panelRender");
-        let panelLoader = document.getElementById("panelLoader");
-        let inputReply = document.getElementById("inputReply");
-        let btnSend = document.getElementById("btnSend");
-        let btnNew = document.getElementById("btnNew")
+        const panelBox = document.getElementById("panelBox");
+        const panelRender = document.getElementById("panelRender");
+        const panelLoader = document.getElementById("panelLoader");
+        const inputReply = document.getElementById("inputReply");
+        const btnSend = document.getElementById("btnSend");
+        const btnNew = document.getElementById("btnNew");
 
-        const SESSION_KEY = "chatSessionKey";
-        const ENDPOINT = "api/chat/";
+        (async () => {
+            const message = new URLSearchParams(window.location.search).get("m");
+
+            if (message != null) {
+                inputReply.value = message;
+                inputReply.disabled = false;
+                inputReply.focus();
+            }
+
+            restoreHistory();
+        })();
 
         function getSessionKey() {
-            return localStorage.getItem(SESSION_KEY);
+            return localStorage.getItem("chatSessionKey");
         }
 
         function setSessionKey(key) {
-            localStorage.setItem(SESSION_KEY, key);
+            localStorage.setItem("chatSessionKey", key);
         }
 
         function escapeHtml(text) {
-            let div = document.createElement("div");
+            const div = document.createElement("div");
             div.textContent = text;
             return div.innerHTML;
         }
 
         function renderMessage(role, content, animate = true) {
-            let isUser = role == "user";
-            let body = isUser ? escapeHtml(content) : marked.parse(content);
-            let intro = animate ? " -intro -intro__float__" + (isUser ? "right" : "left") : "";
-            let item = elementFromHTML(/*html*/`
+            const isUser = role == "user";
+            const body = isUser ? escapeHtml(content) : marked.parse(content);
+            const intro = animate ? " -intro -intro__float__" + (isUser ? "right" : "left") : "";
+
+            const item = elementFromHTML(/*html*/`
                 <div class="item ${isUser ? "item--user" : "item--ai"}">
                     <div></div>
                     <div class="text ${isUser ? "" : "item--ai__text"}${intro}">
@@ -385,7 +395,7 @@ include("common.php");
 
             panelRender.appendChild(item);
 
-            for (let anchor of item.querySelectorAll("a")) {
+            for (const anchor of item.querySelectorAll("a")) {
                 anchor.setAttribute("target", "_blank");
             }
 
@@ -393,20 +403,20 @@ include("common.php");
         }
 
         async function restoreHistory() {
-            let key = getSessionKey();
+            const key = getSessionKey();
 
             if (key == null) {
                 return;
             }
 
-            let response = await fetch(ENDPOINT + "?key=" + encodeURIComponent(key));
+            const response = await fetch("api/chat/" + "?key=" + encodeURIComponent(key));
 
             if (!response.ok) {
-                localStorage.removeItem(SESSION_KEY);
+                localStorage.removeItem("chatSessionKey");
                 return;
             }
 
-            let data = await response.json();
+            const data = await response.json();
 
             if (data.messages == null || data.messages.length == 0) {
                 return;
@@ -414,7 +424,7 @@ include("common.php");
 
             panelRender.innerHTML = "";
 
-            for (let message of data.messages) {
+            for (const message of data.messages) {
                 renderMessage(message.role, message.content, false);
             }
         }
@@ -430,21 +440,10 @@ include("common.php");
             {target: "body > .main > .content > .contact > .assistant > .chat > .reply", type: "-intro__float__left"}
         ]);
 
-        let message = new URLSearchParams(window.location.search).get("m");
-
-        if (message != null) {
-            inputReply.value = message;
-            inputReply.disabled = false;
-            inputReply.focus();
-        }
-
         btnSend.onclick = async () => {
-            let content = inputReply.value.trim();
-
+            const content = inputReply.value.trim();
             if (content == "") return;
-
             renderMessage("user", content);
-
             inputReply.value = "";
             inputReply.disabled = true;
             btnSend.disabled = true;
@@ -452,7 +451,7 @@ include("common.php");
             panelLoader.style.opacity = "100%";
 
             try {
-                let response = await fetch(ENDPOINT, {
+                const response = await fetch("api/chat/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -463,22 +462,19 @@ include("common.php");
                     })
                 });
 
-                let data = await response.json();
+                const data = await response.json();
 
                 if (!response.ok) {
                     throw new Error(data.message || ("Request failed (" + response.status + ")"));
                 }
 
                 setSessionKey(data.key);
-
-                let url = new URL(window.location.href);
+                const url = new URL(window.location.href);
                 url.searchParams.delete("m");
                 window.history.replaceState({}, "", url);
-
                 panelLoader.style.opacity = "0%";
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 panelLoader.style.height = "0rem";
-
                 renderMessage("assistant", data.reply);
             } catch (error) {
                 panelLoader.style.opacity = "0%";
@@ -489,8 +485,6 @@ include("common.php");
             inputReply.disabled = false;
             btnSend.disabled = false;
         }
-
-        restoreHistory();
 
         inputReply.oninput = () => {
             btnSend.disabled = inputReply.value == "";
@@ -504,7 +498,7 @@ include("common.php");
 
         btnNew.onclick = () => {
             if (confirm("Your current conversation will be cleared. Are you sure?") == false) return;
-            localStorage.removeItem(SESSION_KEY);
+            localStorage.removeItem("chatSessionKey");
             location.reload();
         }
     </script>
