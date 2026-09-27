@@ -33,7 +33,9 @@ require_once "common.php";
 
             body > .main {
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg3.webp");
-                background-size: 100%;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
                 
                 & > .content {
                     & > .socials {
@@ -217,10 +219,6 @@ require_once "common.php";
 
             @media (orientation: portrait) {
                 body > .main {
-                    background-size: cover;
-                    background-position: 30% 50%;
-                    background-attachment: fixed;
-
                     & > .content {
                         & > .socials {
                             padding: 1rem;
@@ -269,7 +267,7 @@ require_once "common.php";
         </style>
     </head>
     <body>
-        <div class="main -main -script__parallax">
+        <div class="main -main">
             <?= setHeader("contact") ?>
             <div class="content -content">
                 <div class="socials">
