@@ -104,6 +104,101 @@ body {
     transform: skewX(10deg);
 }
 
+.-chat {
+    & > .container {
+        padding: 1rem;
+    
+        & > .box {
+            background-color: #000a;
+            border-radius: 1rem;
+            height: 30rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+        
+            & > .render {
+                & > .item {
+                    padding: 1rem;
+
+                    & > .text {
+                        padding: 1rem;
+                        border-radius: 1rem;
+                        max-width: 30rem;
+                    }
+                }
+
+                & > .item--ai {
+                    display: grid;
+                    grid-template-columns: max-content 1fr;
+
+                    & > .text {
+                        background-color: var(--theme);
+                    }
+                }
+
+                & > .item--user {
+                    display: grid;
+                    grid-template-columns: 1fr max-content;
+
+                    & > .text {
+                        background-color: #555;
+                    }
+                }
+            }
+
+            & > .loader {
+                display: grid;
+                grid-template-columns: max-content 1fr;
+                transition-duration: 1s;
+                opacity: 0%;
+                height: 0rem;
+                overflow: hidden;
+
+                & > .icon {
+                    padding: 5rem;
+                    padding-top: 1rem;
+                    padding-bottom: 1rem;
+                    color: var(--theme--contrast);
+
+                    & > svg {
+                        width: 5rem;
+                        height: 5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    & > .reply {
+        padding: 1rem;
+
+        & > .box {
+            display: grid;
+            grid-template-columns: 1fr max-content;
+            border-radius: 1rem;
+            overflow: hidden;
+
+            & > .input {
+                & > input {
+                    height: 100%;
+                    box-sizing: border-box;
+                }
+            }
+
+            & > .button {
+                & > button {
+                    height: 100%;
+                    box-sizing: border-box;
+
+                    & > svg {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .-main {
     opacity: 0%;
 }
@@ -302,6 +397,20 @@ body {
     
         & > .title {
             text-align: center;
+        }
+    }
+
+    .-chat {
+        & > .container {
+            & > .box {
+                & > .render {
+                    & > .item {
+                        & > .text {
+                            max-width: 20rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
