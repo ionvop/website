@@ -303,39 +303,7 @@ require_once "common.php";
                                 </button>
                             </div>
                         </div>
-                        <div class="chat">
-                            <div class="container">
-                                <div class="box" id="panelBox">
-                                    <div class="render" id="panelRender">
-                                        <div class="item--ai item">
-                                            <div class="item--ai__text text -intro -intro__float__left">
-                                                Hello! ✨ I'm Hatsune Pinku and I will be your assistant regarding your messages for ionvop. 💖
-                                            </div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                    <div class="loader" id="panelLoader">
-                                        <div class="icon">
-                                            <?= loader("rings") ?>
-                                        </div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="reply">
-                                <div class="box">
-                                    <div class="input">
-                                        <input class="-input" id="inputReply" placeholder="Write a reply" oninput="inputReply(this)" onkeydown="if (event.key == 'Enter') inputReplyEnter(this)">
-                                    </div>
-                                    <div class="button">
-                                        <button class="-button" id="btnSend" disabled>
-                                            <?= icon("send") ?>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?= renderChatAssistant() ?>
                     </div>
                 </div>
             </div>
@@ -344,11 +312,8 @@ require_once "common.php";
     </body>
     <script src="script.js"></script>
     <script>
-        const panelBox = document.getElementById("panelBox");
-        const panelRender = document.getElementById("panelRender");
-        const panelLoader = document.getElementById("panelLoader");
-        const inputReply = document.getElementById("inputReply");
-        const btnSend = document.getElementById("btnSend");
+        <?= chatAssistantJS("chatSessionKey") ?>
+
         const btnNew = document.getElementById("btnNew");
 
         (async () => {
@@ -359,73 +324,7 @@ require_once "common.php";
                 inputReply.disabled = false;
                 inputReply.focus();
             }
-
-            restoreHistory();
         })();
-
-        function getSessionKey() {
-            return localStorage.getItem("chatSessionKey");
-        }
-
-        function setSessionKey(key) {
-            localStorage.setItem("chatSessionKey", key);
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement("div");
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function renderMessage(role, content, animate = true) {
-            const isUser = role == "user";
-            const body = isUser ? escapeHtml(content) : marked.parse(content);
-            const intro = animate ? " -intro -intro__float__" + (isUser ? "right" : "left") : "";
-
-            const item = elementFromHTML(/*html*/`
-                <div class="item ${isUser ? "item--user" : "item--ai"}">
-                    <div></div>
-                    <div class="text ${isUser ? "" : "item--ai__text"}${intro}">
-                        ${body}
-                    </div>
-                </div>
-            `);
-
-            panelRender.appendChild(item);
-
-            for (const anchor of item.querySelectorAll("a")) {
-                anchor.setAttribute("target", "_blank");
-            }
-
-            scrollToPosition(panelBox, 1, 1000, "easeInOut");
-        }
-
-        async function restoreHistory() {
-            const key = getSessionKey();
-
-            if (key == null) {
-                return;
-            }
-
-            const response = await fetch("api/chat/" + "?key=" + encodeURIComponent(key));
-
-            if (!response.ok) {
-                localStorage.removeItem("chatSessionKey");
-                return;
-            }
-
-            const data = await response.json();
-
-            if (data.messages == null || data.messages.length == 0) {
-                return;
-            }
-
-            panelRender.innerHTML = "";
-
-            for (const message of data.messages) {
-                renderMessage(message.role, message.content, false);
-            }
-        }
 
         animatePage([
             {target: "body > .main > .content > .socials > .title", type: "-intro__float__left"},
@@ -438,65 +337,17 @@ require_once "common.php";
             {target: "body > .main > .content > .contact > .assistant > .chat > .reply", type: "-intro__float__left"}
         ]);
 
+        const sendReply = btnSend.onclick;
         btnSend.onclick = async () => {
-            const content = inputReply.value.trim();
-            if (content == "") return;
-            renderMessage("user", content);
-            inputReply.value = "";
-            inputReply.disabled = true;
-            btnSend.disabled = true;
-            panelLoader.style.height = "auto";
-            panelLoader.style.opacity = "100%";
-
-            try {
-                const response = await fetch("api/chat/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        key: getSessionKey() ?? undefined,
-                        content: content
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || ("Request failed (" + response.status + ")"));
-                }
-
-                setSessionKey(data.key);
-                const url = new URL(window.location.href);
-                url.searchParams.delete("m");
-                window.history.replaceState({}, "", url);
-                panelLoader.style.opacity = "0%";
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                panelLoader.style.height = "0rem";
-                renderMessage("assistant", data.reply);
-            } catch (error) {
-                panelLoader.style.opacity = "0%";
-                panelLoader.style.height = "0rem";
-                renderMessage("assistant", "⚠️ " + error.message);
-            }
-
-            inputReply.disabled = false;
-            btnSend.disabled = false;
-        }
-
-        inputReply.oninput = () => {
-            btnSend.disabled = inputReply.value == "";
-        }
-
-        inputReply.onkeydown = (event) => {
-            if (event.key == "Enter") {
-                btnSend.click();
-            }
-        }
+            const url = new URL(window.location.href);
+            url.searchParams.delete("m");
+            window.history.replaceState({}, "", url);
+            await sendReply();
+        };
 
         btnNew.onclick = () => {
             if (confirm("Your current conversation will be cleared. Are you sure?") == false) return;
-            localStorage.removeItem("chatSessionKey");
+            localStorage.removeItem(CHAT.key);
             location.reload();
         }
     </script>
