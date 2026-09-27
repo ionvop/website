@@ -63,11 +63,9 @@ async function animatePage(contentTimeline) {
     }
 
     for (let animation of animationTimeline) {
-        waitForElementVisible(animation.target).then(element => {
-            element.classList.add("-intro");
-            element.classList.add(animation.type);
-        });
-        
+        const element = await waitForElementVisible(animation.target);
+        element.classList.add("-intro");
+        element.classList.add(animation.type);
         await new Promise(resolve => setTimeout(resolve, 100));
     }
 }
