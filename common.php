@@ -3,6 +3,46 @@
 require_once "config.php";
 $db = new SQLite3("database.db");
 
+// ---------------------------------------------------------------------------
+// Auth helpers (shared by admin/ and admin/dashboard/)
+// ---------------------------------------------------------------------------
+
+function startSession() {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+
+function isAuthed(): bool {
+    startSession();
+    return ($_SESSION["admin"] ?? false) == true;
+}
+
+function attemptLogin(string $password): bool {
+    global $ADMIN_PASSWORD;
+
+    if ($ADMIN_PASSWORD == "") {
+        return false;
+    }
+
+    if ($password != $ADMIN_PASSWORD) {
+        return false;
+    }
+
+    startSession();
+    $_SESSION["admin"] = true;
+    return true;
+}
+
+function logout() {
+    startSession();
+    $_SESSION["admin"] = false;
+}
+
+function esc($value): string {
+    return htmlspecialchars($value ?? "");
+}
+
 function setHeader($page) {
     $selected = function($a, $b) {
         if ($a == $b && $b == "sites") return "sites--selected";
