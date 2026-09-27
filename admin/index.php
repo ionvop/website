@@ -3,37 +3,8 @@
 chdir("../");
 require_once "common.php";
 
-// ---------------------------------------------------------------------------
-// Auth gate
-// ---------------------------------------------------------------------------
-
-// Already logged in? Go straight to the dashboard.
 if (isAuthed()) {
     header("Location: dashboard/");
-    exit;
-}
-
-// Handle login POSTs before rendering.
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $data = json_decode(file_get_contents('php://input'), true);
-    $action = $data["action"] ?? null;
-
-    if ($action == "login") {
-        $password = $data["password"] ?? "";
-        $ok = attemptLogin($password);
-
-        if ($ok == false) {
-            http_response_code(401);
-            echo json_encode(["message" => "Incorrect password."]);
-            exit;
-        }
-
-        echo json_encode(["ok" => true]);
-        exit;
-    }
-
-    http_response_code(400);
-    echo json_encode(["message" => "Unknown action."]);
     exit;
 }
 
@@ -54,9 +25,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
+                height: 100%;
+                box-sizing: border-box;
 
                 & > .content {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    box-sizing: border-box;
+
                     & > .login {
+                        width: 100%;
                         padding: 10rem;
                         padding-top: 5rem;
 
@@ -91,7 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             color: #f00;
                         }
                     }
-
                 }
             }
         </style>
@@ -120,36 +98,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </body>
     <script src="script.js"></script>
     <script>
-        let inputPassword = document.getElementById("inputPassword");
-        let btnLogin = document.getElementById("btnLogin");
-        let loginError = document.getElementById("loginError");
+        const inputPassword = document.getElementById("inputPassword");
+        const btnLogin = document.getElementById("btnLogin");
+        const loginError = document.getElementById("loginError");
 
         btnLogin.onclick = async () => {
-            let password = inputPassword.value;
-
+            const password = inputPassword.value;
             if (password == "") return;
-
             btnLogin.disabled = true;
 
             try {
-                let response = await fetch("admin/", {
+                const response = await fetch("api/admin/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        action: "login",
                         password: password
                     })
                 });
 
-                let data = await response.json();
+                const data = await response.json();
 
                 if (!response.ok) {
                     throw new Error(data.message || ("Request failed (" + response.status + ")"));
                 }
 
-                location.href = "dashboard/";
+                location.href = "admin/dashboard/";
             } catch (error) {
                 loginError.textContent = "⚠️ " + error.message;
                 btnLogin.disabled = false;
