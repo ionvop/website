@@ -193,7 +193,7 @@ require_once "common.php";
                         <div class="socials card">
                             <div class="info">
                                 <div class="icon">
-                                    <?=icon("group")?>
+                                    <?= icon("group") ?>
                                 </div>
                                 <div class="subject -title -center">
                                     Platforms
