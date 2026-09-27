@@ -1,10 +1,12 @@
-if (Math.random() < 0.01) {
-    setTimeout(() => {
-        document.body.style.backgroundImage = "url('assets/bkub_chu2.webp')";
-        document.body.style.backgroundSize = "20%";
-        document.body.style.backgroundAttachment = "fixed";
-    }, 2000);
-}
+(async () => {
+    if (Math.random() < 0.01) {
+        setTimeout(() => {
+            document.body.style.backgroundImage = "url('assets/bkub_chu2.webp')";
+            document.body.style.backgroundSize = "20%";
+            document.body.style.backgroundAttachment = "fixed";
+        }, 2000);
+    }
+})();
 
 globalEventListener("click", ".-script__link", (element, event) => {
     if (event.shiftKey) {
@@ -33,7 +35,7 @@ globalEventListener("click", ".-script__new", element => {
 });
 
 async function animatePage(contentTimeline) {
-    let headerTimeline = [
+    const headerTimeline = [
         { target: ".-main", type: "-intro__fade" },
         { target: ".-header > .content > .title", type: "-intro__float__up" },
         { target: ".-header > .content > .home", type: "-intro__float__left" },
@@ -42,7 +44,7 @@ async function animatePage(contentTimeline) {
         { target: ".-header > .content > .sites", type: "-intro__float__left" }
     ]
 
-    let footerTimeline = [
+    const footerTimeline = [
         { target: ".-footer > .title", type: "-intro__float__down" },
         { target: ".-footer > .home", type: "-intro__float__left" },
         { target: ".-footer > .about", type: "-intro__float__left" },
@@ -50,10 +52,10 @@ async function animatePage(contentTimeline) {
         { target: ".-footer > .join", type: "-intro__float__left" }
     ]
 
-    let animationTimeline = [...headerTimeline, ...contentTimeline, ...footerTimeline];
+    const animationTimeline = [...headerTimeline, ...contentTimeline, ...footerTimeline];
 
-    for (let animation of animationTimeline) {
-        let element = document.querySelector(animation.target);
+    for (const animation of animationTimeline) {
+        const element = document.querySelector(animation.target);
 
         if (element == null) {
             continue;
@@ -62,7 +64,11 @@ async function animatePage(contentTimeline) {
         element.style.opacity = "0%";
     }
 
-    for (let animation of animationTimeline) {
+    for (const animation of animationTimeline) {
+        if (document.querySelector(animation.target) == null) {
+            continue;
+        }
+        
         const element = await waitForElementVisible(animation.target);
         element.classList.add("-intro");
         element.classList.add(animation.type);
@@ -70,40 +76,35 @@ async function animatePage(contentTimeline) {
     }
 }
 
-function animateOutro(redirect) {
-    let main = document.querySelector(".-main");
-    let elements = document.querySelectorAll(".-intro");
+async function animateOutro(redirect) {
+    const main = document.querySelector(".-main");
+    const elements = document.querySelectorAll(".-intro");
     main.style.opacity = "100%";
     main.style.animationDelay = "1s";
 
-    let delay = 0;
+    setTimeout(() => {
+        location.href = redirect;
+    }, 2000);
 
-    for (let element of elements) {
+    for (const element of elements) {
         let animationType = "";
 
-        for (let className of element.classList) {
+        for (const className of element.classList) {
             if (className.startsWith("-intro__")) {
                 animationType = className;
             }
         }
 
         if (animationType == "") {
-            return;
+            continue;
         }
 
+        await sleep(100);
         element.classList.remove(animationType);
         element.style.animationDirection = "reverse";
-        
-        setTimeout(() => {
-            element.classList.add(animationType);
-        }, 10);
-
-        delay += 0.1;
+        void element.offsetWidth;
+        element.classList.add(animationType);
     }
-
-    setTimeout(() => {
-        location.href = redirect;
-    }, 2000);
 }
 
 function globalEventListener(type, selector, callback) {
@@ -202,7 +203,11 @@ function waitForElementVisible(selector, options = {}) {
 }
 
 function elementFromHTML(html) {
-    let template = document.createElement("template");
+    const template = document.createElement("template");
     template.innerHTML = html;
     return template.content.firstElementChild;
+}
+
+async function sleep(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
 }
