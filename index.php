@@ -16,7 +16,9 @@ require_once "common.php";
         <style>
             body > .main {
                 background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg.webp");
-                background-size: 100%;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
 
                 & > .content {
                     & > .title {
@@ -78,10 +80,6 @@ require_once "common.php";
 
             @media (orientation: portrait) {
                 body > .main {
-                    background-size: cover;
-                    background-position: 70% 50%;
-                    background-attachment: fixed;
-                
                     & > .content {
                         & > .about {
                             grid-template-columns: 1fr;
@@ -92,7 +90,7 @@ require_once "common.php";
         </style>
     </head>
     <body>
-        <div class="main -main -script__parallax" data-height="-0.5">
+        <div class="main -main">
             <?= setHeader("home") ?>
             <div class="content -content">
                 <div class="title -center">
