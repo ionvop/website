@@ -17,7 +17,9 @@ require_once "common.php";
         <style>
             body > .main {
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg2.webp");
-                background-size: 100%;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
             
                 & > .content {
                     padding: 10rem;
@@ -87,10 +89,6 @@ require_once "common.php";
 
             @media (orientation: portrait) {
                 body > .main {
-                    background-size: cover;
-                    background-position: center;
-                    background-attachment: fixed;
-                
                     & > .content {
                         padding: 1rem;
 
@@ -109,7 +107,7 @@ require_once "common.php";
         </style>
     </head>
     <body>
-        <div class="main -main -script__parallax">
+        <div class="main -main">
             <?= setHeader("about") ?>
             <div class="content -content">
                 <div class="profile">
