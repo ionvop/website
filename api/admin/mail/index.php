@@ -12,6 +12,25 @@ if (isAuthed() == false) {
 
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "GET":
+        if (isset($_GET["id"])) {
+            $mail = executePreparedQuery($db, <<<SQL
+                SELECT *
+                FROM `mails`
+                WHERE `id` = :id
+            SQL, [
+                ":id" => $_GET["id"]
+            ])->fetchArray();
+
+            if ($mail == false) {
+                http_response_code(404);
+                echo json_encode(["message" => "Mail not found"]);
+                exit;
+            }
+
+            echo json_encode(["mail" => $mail]);
+            exit;
+        }
+
         $result = executePreparedQuery($db, <<<SQL
             SELECT *
             FROM `mails`
