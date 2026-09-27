@@ -17,7 +17,9 @@ require_once "common.php";
         <style>
             body > .main {
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg4.webp");
-                background-size: 100%;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
 
                 & > .content {
                     & > .header {
@@ -72,7 +74,9 @@ require_once "common.php";
                             cursor: pointer;
                             filter: brightness(100%);
                             transition: filter 0.1s;
-                            background-size: 100%;
+                            background-size: cover;
+                            background-position: center;
+                            background-attachment: fixed;
 
                             &:hover {
                                 filter: brightness(150%);
@@ -140,10 +144,6 @@ require_once "common.php";
 
             @media (orientation: portrait) {
                 body > .main {
-                    background-size: cover;
-                    background-position: 70% 50%;
-                    background-attachment: fixed;
-
                     & > .content {
                         & > .header {
                             & > .title {
@@ -159,21 +159,13 @@ require_once "common.php";
                                 grid-template-columns: 1fr;
                             }
                         }
-
-                        & > .section {
-                            & > .header {
-                                background-size: cover;
-                                background-position: 0% 50%;
-                                background-attachment: fixed;
-                            }
-                        }
                     }
                 }
             }
         </style>
     </head>
     <body>
-        <div class="main -main -script__parallax">
+        <div class="main -main">
             <?= setHeader("sites") ?>
             <div class="content -content">
                 <div class="header">
@@ -228,7 +220,7 @@ require_once "common.php";
                     </div>
                 </div>
                 <div class="ionvop section">
-                    <div class="header -script__parallax -script__new" data-href="/home/">
+                    <div class="header -script__new" data-href="/home/">
                         <div class="title -title -center">
                             ionvop
                         </div>
@@ -249,7 +241,7 @@ require_once "common.php";
                     </div>
                 </div>
                 <div class="mailist section">
-                    <div class="header -script__parallax -script__new" data-href="/mailist/">
+                    <div class="header -script__new" data-href="/mailist/">
                         <div class="title -title -center">
                             mailist
                         </div>
@@ -270,7 +262,7 @@ require_once "common.php";
                     </div>
                 </div>
                 <div class="saucedb section">
-                    <div class="header -script__parallax -script__new" data-href="/saucedb/">
+                    <div class="header -script__new" data-href="/saucedb/">
                         <div class="title -title -center">
                             SauceDB
                         </div>
@@ -294,7 +286,7 @@ require_once "common.php";
                     </div>
                 </div>
                 <div class="nicka section">
-                    <div class="header -script__parallax -script__new" data-href="https://nickarental.com/">
+                    <div class="header -script__new" data-href="https://nickarental.com/">
                         <div class="title -title -center">
                             Nicka's Bohol Motorbike & Car Rental
                         </div>
@@ -318,7 +310,7 @@ require_once "common.php";
                     </div>
                 </div>
                 <div class="wcolor section">
-                    <div class="header -script__parallax -script__new" data-href="https://wplace.ionvop.com/color-converter/">
+                    <div class="header -script__new" data-href="https://wplace.ionvop.com/color-converter/">
                         <div class="title -title -center">
                             Wplace Color Converter
                         </div>
@@ -380,21 +372,5 @@ require_once "common.php";
             {target: "body > .main > .content > .wcolor > .details > .text", type: "-intro__float__left"},
             {target: "body > .main > .content > .wcolor > .details > .visit", type: "-intro__float__left"},
         ]);
-
-        window.addEventListener("resize", () => {
-            updateOffset();
-        });
-
-        updateOffset();
-
-        function updateOffset() {
-            let sections = document.querySelectorAll("body > .main > .content > .header");
-
-            for (let section of sections) {
-                section.setAttribute("data-offset", (section.getBoundingClientRect().top + window.scrollY) * -0.7);
-            }
-
-            updateParallax();
-        }
     </script>
 </html>
