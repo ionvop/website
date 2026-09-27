@@ -184,8 +184,8 @@ require_once "common.php";
             {target: "body > .main > .content > .profile > .column > .avatar > img", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .column > .username", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .column > .titles", type: "-intro__float__left"},
-            {target: "body > .main > .content > .profile > .column > .label", type: "-intro__float__left"},
-            {target: "body > .main > .content > .profile > .column > .chu2", type: "-intro__float__left"},
+            {target: "body > .main > .content > .profile > .column > .label", type: "-intro__float__left"}, // ignore from wait until visible
+            {target: "body > .main > .content > .profile > .column > .chu2", type: "-intro__float__left"}, // ignore from wait until visible
             {target: "body > .main > .content > .profile > .panel > .banner", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .panel > .about > .title", type: "-intro__float__left"},
             {target: "body > .main > .content > .profile > .panel > .about > .subtitle", type: "-intro__float__left"},
