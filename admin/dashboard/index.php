@@ -34,10 +34,12 @@ while ($row = $result->fetchArray()) {
         <style>
             html, body {
                 height: 100%;
+                box-sizing: border-box;
             }
 
             body > .main {
                 height: 100%;
+                box-sizing: border-box;
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/bg3.webp");
                 background-size: cover;
                 background-position: center;
@@ -45,6 +47,7 @@ while ($row = $result->fetchArray()) {
 
                 & > .content {
                     height: 100%;
+                    box-sizing: border-box;
                     display: flex;
                     flex-direction: column;
 
@@ -64,10 +67,12 @@ while ($row = $result->fetchArray()) {
                         flex: 1 1 auto;
                         min-height: 0;
                         width: 100%;
+                        box-sizing: border-box;
                         padding: 0 1rem 1rem;
 
                         & > .mails {
                             height: 100%;
+                            box-sizing: border-box;
                             display: grid;
                             grid-template-columns: 1fr;
                             grid-template-rows: max-content 1fr;
@@ -87,6 +92,7 @@ while ($row = $result->fetchArray()) {
                                 background-color: #000a;
                                 border-radius: 1rem;
                                 height: 100%;
+                                box-sizing: border-box;
                                 min-height: 0;
                                 overflow-y: auto;
 
@@ -127,6 +133,7 @@ while ($row = $result->fetchArray()) {
                                 border-radius: 1rem;
                                 padding: 1rem;
                                 height: 100%;
+                                box-sizing: border-box;
                                 min-height: 0;
                                 overflow-y: auto;
 
