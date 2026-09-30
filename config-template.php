@@ -1,5 +1,4 @@
 <?php
 
 $OPENROUTER_API_KEY = "";
-$MODEL = "";
 $ADMIN_PASSWORD = "";
