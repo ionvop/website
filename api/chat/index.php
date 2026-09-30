@@ -67,7 +67,7 @@ function insertMessage(int $sessionId, string $role, string $content) {
 }
 
 function askModel(array $history): array {
-    global $OPENROUTER_API_KEY, $MODEL;
+    global $OPENROUTER_API_KEY;
 
     $response = fetch("https://openrouter.ai/api/v1/chat/completions", [
         "method" => "POST",
@@ -76,7 +76,7 @@ function askModel(array $history): array {
             "Authorization" => "Bearer {$OPENROUTER_API_KEY}"
         ],
         "body" => [
-            "model" => $MODEL,
+            "model" => "deepseek/deepseek-v4-flash-0731:floor",
             "messages" => $history,
             "reasoning_effort" => "none",
             "response_format" => [
