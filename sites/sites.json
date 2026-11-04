@@ -1,0 +1,42 @@
+[
+    {
+        "id": "ionvop",
+        "title": "ionvop",
+        "subtitle": "Click here to visit this website",
+        "description": "This is the landing page for this website.\nYou are currently here right now.",
+        "href": "/home/",
+        "image": "assets/sites/ionvop.webp"
+    },
+    {
+        "id": "mailist",
+        "title": "mailist",
+        "subtitle": "A simple platform for custom maimai charts",
+        "description": "mailist offers a platform for sharing, discovering, and enjoying custom maimai charts.\nThe goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.",
+        "href": "/mailist/",
+        "image": "assets/sites/mailist.webp"
+    },
+    {
+        "id": "saucedb",
+        "title": "SauceDB",
+        "subtitle": "A simple database for archiving anime and manga sources.",
+        "description": "SauceDB is a simple database for archiving sources of anime and manga that took a little more effort to find.\nThis was one of my first projects and was mostly for personal use.\n\nIt was very useful back when I was running a Facebook page called \"Anime SauceHub\" dedicated to helping people find the source of images they provided.\nUnfortunately, the page was taken down and I no longer do source hunting.",
+        "href": "/saucedb/",
+        "image": "assets/sites/saucedb.webp"
+    },
+    {
+        "id": "nicka",
+        "title": "Nicka's Bohol Motorbike & Car Rental",
+        "subtitle": "An early-2025 commission",
+        "description": "Nicka's Bohol Motorbike & Car Rental is a service that provide top-quality motorbikes and cars for rent in Bohol, Philippines.\nVehicles are well-maintained, reliable, and perfect for exploring the beautiful island of Bohol at your own pace.\n\nThis was my first time working on a service portfolio kind of website that doesn't have much user interactivity.\nIt was not my strong suite so I hope my future commissions wouldn't be too similar.",
+        "href": "https://nickarental.com/",
+        "image": "assets/sites/nicka.webp"
+    },
+    {
+        "id": "wcolor",
+        "title": "Wplace Color Converter",
+        "subtitle": "oh hell nah not another wplace color converter",
+        "description": "Just another simple color conversion tool that converts the colors from a pixel art/image to the colors available in Wplace\nIt is one of the already many existing color conversion tools for Wplace out there.\n\nUnlike many other tools such as PEPOAFONSO/color_converter_wplace and Yet Another Wplace Color Converter,\nthis tool allows the ability to estimate how long it would take to finish a project solo with and without the flag bonus.",
+        "href": "https://wplace.ionvop.com/color-converter/",
+        "image": "assets/sites/wcolor.webp"
+    }
+]
