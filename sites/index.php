@@ -3,6 +3,38 @@
 chdir("../");
 require_once "common.php";
 
+$sitesJson = file_get_contents(__DIR__ . "/sites.json");
+if ($sitesJson === false) {
+    throw new RuntimeException("Unable to read Sites configuration.");
+}
+
+$sites = json_decode($sitesJson, true, 512, JSON_THROW_ON_ERROR);
+if (!is_array($sites) || !array_is_list($sites)) {
+    throw new UnexpectedValueException("Sites configuration must be a JSON array.");
+}
+
+$siteAnimations = [];
+$siteAnimationTargets = [
+    ".header > .title",
+    ".header > .subtitle",
+    ".details > .text",
+    ".details > .visit"
+];
+foreach ($sites as $index => $site) {
+    foreach (["id", "title", "subtitle", "description", "href", "image"] as $key) {
+        if (!isset($site[$key]) || !is_string($site[$key])) {
+            throw new UnexpectedValueException("Invalid Sites entry at index " . $index . ".");
+        }
+    }
+
+    foreach ($siteAnimationTargets as $target) {
+        $siteAnimations[] = [
+            "target" => "body > .main > .content > .site-entry[data-site-index=\"" . $index . "\"] > " . $target,
+            "type" => "-intro__float__left"
+        ];
+    }
+}
+
 ?>
 
 <html>
@@ -110,35 +142,6 @@ require_once "common.php";
                         }
                     }
 
-                    & > .ionvop {
-                        & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/ionvop.webp");
-                        }
-                    }
-
-                    & > .mailist {
-                        & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/mailist.webp");
-                        }
-                    }
-
-                    & > .saucedb {
-                        & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/saucedb.webp");
-                        }
-                    }
-
-                    & > .nicka {
-                        & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/nicka.webp");
-                        }
-                    }
-
-                    & > .wcolor {
-                        & > .header {
-                            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("assets/wcolor.webp");
-                        }
-                    }
                 }
             }
 
@@ -219,120 +222,28 @@ require_once "common.php";
                         </div>
                     </div>
                 </div>
-                <div class="ionvop section">
-                    <div class="header -script__new" data-href="/home/">
-                        <div class="title -title -center">
-                            ionvop
+                <?php foreach ($sites as $index => $site): ?>
+                    <div class="site-entry section" data-site-index="<?= $index ?>" data-site-id="<?= esc($site["id"]) ?>">
+                        <div class="header -script__new" data-href="<?= esc($site["href"]) ?>" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('<?= esc($site["image"]) ?>');">
+                            <div class="title -title -center">
+                                <?= esc($site["title"]) ?>
+                            </div>
+                            <div class="subtitle -center">
+                                <?= esc($site["subtitle"]) ?>
+                            </div>
                         </div>
-                        <div class="subtitle -center">
-                            Click here to visit this website
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="text">
-                            This is the landing page for this website.<br>
-                            You are currently here right now.
-                        </div>
-                        <div class="visit -center">
-                            <button class="-button -script__new" data-href="/home/">
-                                Visit Page
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="mailist section">
-                    <div class="header -script__new" data-href="/mailist/">
-                        <div class="title -title -center">
-                            mailist
-                        </div>
-                        <div class="subtitle -center">
-                            A simple platform for custom maimai charts
+                        <div class="details">
+                            <div class="text">
+                                <?= nl2br(esc($site["description"]), false) ?>
+                            </div>
+                            <div class="visit -center">
+                                <button class="-button -script__new" data-href="<?= esc($site["href"]) ?>">
+                                    Visit Page
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="details">
-                        <div class="text">
-                            mailist offers a platform for sharing, discovering, and enjoying custom maimai charts.<br>
-                            The goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.
-                        </div>
-                        <div class="visit -center">
-                            <button class="-button -script__new" data-href="/mailist/">
-                                Visit Page
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="saucedb section">
-                    <div class="header -script__new" data-href="/saucedb/">
-                        <div class="title -title -center">
-                            SauceDB
-                        </div>
-                        <div class="subtitle -center">
-                            A simple database for archiving anime and manga sources.
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="text">
-                            SauceDB is a simple database for archiving sources of anime and manga that took a little more effort to find.<br>
-                            This was one of my first projects and was mostly for personal use.<br>
-                            <br>
-                            It was very useful back when I was running a Facebook page called "Anime SauceHub" dedicated to helping people find the source of images they provided.<br>
-                            Unfortunately, the page was taken down and I no longer do source hunting.
-                        </div>
-                        <div class="visit -center">
-                            <button class="-button -script__new" data-href="/saucedb/">
-                                Visit Page
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="nicka section">
-                    <div class="header -script__new" data-href="https://nickarental.com/">
-                        <div class="title -title -center">
-                            Nicka's Bohol Motorbike & Car Rental
-                        </div>
-                        <div class="subtitle -center">
-                            An early-2025 commission
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="text">
-                            Nicka's Bohol Motorbike & Car Rental is a service that provide top-quality motorbikes and cars for rent in Bohol, Philippines.<br>
-                            Vehicles are well-maintained, reliable, and perfect for exploring the beautiful island of Bohol at your own pace.<br>
-                            <br>
-                            This was my first time working on a service portfolio kind of website that doesn't have much user interactivity.<br>
-                            It was not my strong suite so I hope my future commissions wouldn't be too similar.
-                        </div>
-                        <div class="visit -center">
-                            <button class="-button -script__new" data-href="https://nickarental.com/">
-                                Visit Page
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="wcolor section">
-                    <div class="header -script__new" data-href="https://wplace.ionvop.com/color-converter/">
-                        <div class="title -title -center">
-                            Wplace Color Converter
-                        </div>
-                        <div class="subtitle -center">
-                            oh hell nah not another wplace color converter
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="text">
-                            Just another simple color conversion tool that converts the colors from a pixel art/image to the colors available in Wplace<br>
-                            It is one of the already many existing color conversion tools for Wplace out there.<br>
-                            <br>
-                            Unlike many other tools such as PEPOAFONSO/color_converter_wplace and Yet Another Wplace Color Converter,<br>
-                            this tool allows the ability to estimate how long it would take to finish a project solo with and without the flag bonus.
-                        </div>
-                        <div class="visit -center">
-                            <button class="-button -script__new" data-href="https://wplace.ionvop.com/color-converter/">
-                                Visit Page
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
             <?= setFooter() ?>
         </div>
@@ -351,26 +262,7 @@ require_once "common.php";
             {target: "body > .main > .content > .header > .section > .portfolio > .info > .icon", type: "-intro__float__up"},
             {target: "body > .main > .content > .header > .section > .portfolio > .info > .subject", type: "-intro__float__up"},
             {target: "body > .main > .content > .header > .section > .portfolio > .details", type: "-intro__float__left"},
-            {target: "body > .main > .content > .ionvop > .header > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .ionvop > .header > .subtitle", type: "-intro__float__left"},
-            {target: "body > .main > .content > .ionvop > .details > .text", type: "-intro__float__left"},
-            {target: "body > .main > .content > .ionvop > .details > .visit", type: "-intro__float__left"},
-            {target: "body > .main > .content > .mailist > .header > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .mailist > .header > .subtitle", type: "-intro__float__left"},
-            {target: "body > .main > .content > .mailist > .details > .text", type: "-intro__float__left"},
-            {target: "body > .main > .content > .mailist > .details > .visit", type: "-intro__float__left"},
-            {target: "body > .main > .content > .saucedb > .header > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .saucedb > .header > .subtitle", type: "-intro__float__left"},
-            {target: "body > .main > .content > .saucedb > .details > .text", type: "-intro__float__left"},
-            {target: "body > .main > .content > .saucedb > .details > .visit", type: "-intro__float__left"},
-            {target: "body > .main > .content > .nicka > .header > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .nicka > .header > .subtitle", type: "-intro__float__left"},
-            {target: "body > .main > .content > .nicka > .details > .text", type: "-intro__float__left"},
-            {target: "body > .main > .content > .nicka > .details > .visit", type: "-intro__float__left"},
-            {target: "body > .main > .content > .wcolor > .header > .title", type: "-intro__float__left"},
-            {target: "body > .main > .content > .wcolor > .header > .subtitle", type: "-intro__float__left"},
-            {target: "body > .main > .content > .wcolor > .details > .text", type: "-intro__float__left"},
-            {target: "body > .main > .content > .wcolor > .details > .visit", type: "-intro__float__left"},
+            ...<?= json_encode($siteAnimations, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_THROW_ON_ERROR) ?>
         ]);
     </script>
 </html>
