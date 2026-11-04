@@ -4,24 +4,32 @@
         "title": "ionvop",
         "subtitle": "Click here to visit this website",
         "description": "This is the landing page for this website.\nYou are currently here right now.",
-        "href": "/home/",
+        "href": "https://home.ionvop.com/",
         "image": "assets/sites/ionvop.webp"
+    },
+    {
+        "id": "foodsonhand",
+        "title": "FoodsOnHand",
+        "subtitle": "A late-2025 commission",
+        "description": "FoodsOnHand is your ultimate digital cookbook and culinary community, designed to inspire your cooking creativity and connect you with fellow food lovers.\nExplore a vast collection of recipes tailored to the ingredients you have on hand, rate your favorites, share your own culinary creations, and join an active community where everyone can be both a critique and part of the clique.\nFoodInHand makes cooking fun, social, and deliciously accessible.",
+        "href": "https://foodsonhand.ionvop.com/",
+        "image": "assets/sites/foodsonhand.webp"
     },
     {
         "id": "mailist",
         "title": "mailist",
         "subtitle": "A simple platform for custom maimai charts",
         "description": "mailist offers a platform for sharing, discovering, and enjoying custom maimai charts.\nThe goal is to create a user-friendly space by developing an English-supported platform that makes it easier to share and discover custom maimai charts.",
-        "href": "/mailist/",
+        "href": "https://ionvop.epizy.com/mailist/",
         "image": "assets/sites/mailist.webp"
     },
     {
-        "id": "saucedb",
-        "title": "SauceDB",
-        "subtitle": "A simple database for archiving anime and manga sources.",
-        "description": "SauceDB is a simple database for archiving sources of anime and manga that took a little more effort to find.\nThis was one of my first projects and was mostly for personal use.\n\nIt was very useful back when I was running a Facebook page called \"Anime SauceHub\" dedicated to helping people find the source of images they provided.\nUnfortunately, the page was taken down and I no longer do source hunting.",
-        "href": "/saucedb/",
-        "image": "assets/sites/saucedb.webp"
+        "id": "mailistdx",
+        "title": "mailist DX",
+        "subtitle": "it's like github but for maidata",
+        "description": "An upgrade of mailist",
+        "href": "https://mailist-dx.ionvop.com/",
+        "image": "assets/sites/mailistdx.webp"
     },
     {
         "id": "nicka",
@@ -32,11 +40,35 @@
         "image": "assets/sites/nicka.webp"
     },
     {
+        "id": "nowcast",
+        "title": "Nowcast",
+        "subtitle": "A mid-2026 commission",
+        "description": "A weather and heat-health monitoring app.\nNowcast helps you keep an eye on current weather conditions, extreme-heat risk in your area, and location-tagged updates from other users.",
+        "href": "https://nowcast.ionvop.com/",
+        "image": "assets/sites/nowcast.webp"
+    },
+    {
+        "id": "saucedb",
+        "title": "SauceDB",
+        "subtitle": "A simple database for archiving anime and manga sources.",
+        "description": "SauceDB is a simple database for archiving sources of anime and manga that took a little more effort to find.\nThis was one of my first projects and was mostly for personal use.\n\nIt was very useful back when I was running a Facebook page called \"Anime SauceHub\" dedicated to helping people find the source of images they provided.\nUnfortunately, the page was taken down and I no longer do source hunting.",
+        "href": "https://ionvop.epizy.com/saucedb/",
+        "image": "assets/sites/saucedb.webp"
+    },
+    {
+        "id": "saucepls",
+        "title": "SaucePls",
+        "subtitle": "An animanga-focused QnA website for content identification",
+        "description": "SaucePls is a social platform where people ask for the source of images they've found.\nUsers post unknown images as sauce requests, and the community helps identify them by adding tags, commenting, and providing answers.\nThe original poster (or a moderator) can then accept the correct sauce.",
+        "href": "https://saucepls.ionvop.com/",
+        "image": "assets/sites/saucepls.webp"
+    },
+    {
         "id": "wcolor",
         "title": "Wplace Color Converter",
         "subtitle": "oh hell nah not another wplace color converter",
         "description": "Just another simple color conversion tool that converts the colors from a pixel art/image to the colors available in Wplace\nIt is one of the already many existing color conversion tools for Wplace out there.\n\nUnlike many other tools such as PEPOAFONSO/color_converter_wplace and Yet Another Wplace Color Converter,\nthis tool allows the ability to estimate how long it would take to finish a project solo with and without the flag bonus.",
-        "href": "https://wplace.ionvop.com/color-converter/",
+        "href": "https://ionvop.epizy.com/wplace-color-converter/",
         "image": "assets/sites/wcolor.webp"
     }
 ]
