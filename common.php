@@ -89,7 +89,7 @@ function setFooter(): string {
     return <<<HTML
         <div class="-footer">
             <div class="title">
-                &copy; 2025 ionvop
+                &copy; 2026 ionvop
             </div>
             <div></div>
             <div class="home tab -center__flex -script__link" data-href="./">
