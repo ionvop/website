@@ -32,6 +32,9 @@ require_once "common.php";
                         backdrop-filter: blur(0.5rem);
                     
                         & > .column {
+                            display: grid;
+                            grid-template-rows: repeat(3, max-content) 1fr repeat(2, max-content);
+
                             & > .avatar {
                                 padding: 5rem;
                                 padding-bottom: 1rem;
@@ -48,10 +51,6 @@ require_once "common.php";
                             & > .username {
                                 padding-top: 0rem;
                                 font-weight: bold;
-                            }
-
-                            & > .label {
-                                padding-top: 15rem;
                             }
 
                             & > .chu2 {
@@ -139,6 +138,7 @@ require_once "common.php";
                             <br>
                             the plap guy
                         </div>
+                        <div></div>
                         <div class="label -pad -subtitle -center">
                             my waifu &darr;&darr;&darr;
                         </div>
